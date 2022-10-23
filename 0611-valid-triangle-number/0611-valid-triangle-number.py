@@ -1,27 +1,21 @@
 class Solution(object):
     def triangleNumber(self, nums):
-        #two pointer:
-        #right pointer decrease and as soon as the list has 3 values we can think it is a triangle
-        #[2,2,3,4]
-        #l    t r
-        #triangle list = [2,4,3], [2, 4, 2], [2,3,2] -> how many: 3 traingles count
-        
-        #[4, 2, 3, 4]
-        # l  t  r
-        #triangle list [[4,2,4], [4,3,4], [4,2,3], ]
-        #as soon as t = r, then r -= 1
-        
-        # nums.sort() # nums = [4,2,3,4]
-        # # print(nums) [2, 3, 4, 4]
-        ans = 0
-        nums.sort()
-        for i in reversed(range(1, len(nums))):
-            l, r = 0, i - 1
-            while l < r:
-                if nums[l] + nums[r] > nums[i]:
-                    ans += r - l
-                    r -= 1
+        #[4,2,3,4]
+        nums.sort() #[2, 3, 4, 4] -> [4, 4, 3, 2]
+        # nums.reverse() #[4, 4, 3, 2]
+        result = 0
+        for index in reversed(range(1, len(nums))):
+            # print(nums[index]) 4 -> 3 -> 2
+            left, right = 0, index - 1
+            # print(left,right) #-> (0,0) -> (0,1) -> (0,2) (0, index - 1)
+            # print(nums[left],nums[right]) #(4,4) -> (4,4) -> (4,3)
+            while left < right:
+                if nums[left] + nums[right] > nums[index]:
+                    result += right - left
+                    right -= 1
                 else:
-                    l += 1
-        return ans
+                    left += 1
+        return result
+                    
+                    
         
