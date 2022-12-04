@@ -15,6 +15,9 @@ class Solution(object):
             found = helper(row+1,col,index+1) or helper(row-1,col,index+1) or helper(row,col+1,index+1) or helper(row,col-1,index+1)
             visited.remove((row,col)) #each path
             return found
+        count = defaultdict(int, sum(map(Counter, board), Counter()))
+        if count[word[0]] > count[word[-1]]:
+            word = word[::-1]
         for row in range(Rows):
             for col in range(Cols):
                 if helper(row,col,0):
