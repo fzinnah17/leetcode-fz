@@ -4,40 +4,27 @@ class Solution(object):
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
-        
-        1. dictionary : {2:0}
-        2. for loop
-        sub = target - num[i]
-        9 - 2 = 7
-        if not dict:
-        dict[num[i]]
-        
-        if in dict:
-        
-        
-
+        start = 0
+        end = len(nums)-1
+        while nums < len(nums):
+        1. sum > target:
+            end -= 1
+        2. sum < target:
+            start += 1
+        3. sum == target:
+            return []   
+            nums = [2,7,11,15]
         """
-        ''' nums = [2,7,11,15], target = 9
-        nums = [3,2,4], target = 6
-        map {
-        3 : 0
-        2 : 1
-       
-         
-        }
-        
-        '''
-              
+        start = 0
+        end = len(nums) - 1
+        while (start <= end):
+            curr = nums[start] + nums[end]
+            if curr == target:
+                return [start, end]
+            end -= 1
+            if start == end:
+                start += 1
+                end = len(nums) - 1
 
-        hashMap = {}
-        for i in range(len(nums)):
-            sub = target - nums[i]
-            if sub in hashMap:
-                return [hashMap[sub],i]
-            hashMap[nums[i]] = i
-            
-        return []
-
-                
         
         
