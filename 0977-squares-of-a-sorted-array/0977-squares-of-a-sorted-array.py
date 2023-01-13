@@ -21,5 +21,6 @@ class Solution(object):
                 result.append(nums[start]**2)
                 start += 1
         return result[::-1]
+    #O(n) for both time and space complexity
                 
         
