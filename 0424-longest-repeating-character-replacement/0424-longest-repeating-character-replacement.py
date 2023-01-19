@@ -22,11 +22,10 @@ class Solution(object):
             else:
                 # if (windowSize - max(hashMap.values())) > k:
                 hashMap[s[left]] -= 1
-                    # if hashMap[s[left]] == 0:
-                    #     del hashMap[s[left]]
+                if hashMap[s[left]] == 0:
+                    del hashMap[s[left]]
                 left += 1
             right += 1
-            # maxLen = max(maxLen, windowSize)
             
         return maxLen
                 
