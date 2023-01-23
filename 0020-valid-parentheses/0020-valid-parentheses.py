@@ -22,8 +22,7 @@ class Solution(object):
                 return False #if I am starting with closed parentheses
         if len(stack):
             return False
-        else:
-            return True
+        return True
                 
             
                 
