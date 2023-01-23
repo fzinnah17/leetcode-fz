@@ -1,8 +1,8 @@
 class MinStack(object):
-
+    from collections import deque
     def __init__(self):
-        self.stack = []
-        self.minStack = []
+        self.stack = deque()
+        self.minStack = deque()
         
 
     def push(self, val):
