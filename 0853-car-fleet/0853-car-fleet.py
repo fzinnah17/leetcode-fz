@@ -14,7 +14,7 @@ class Solution(object):
             carVals.append([position[i],speed[i]])
         #2. Sort the list from right to left according to the position because we need to reach a target mile which is in reverse bc usually we go left to right
         carVals.sort(reverse = True) #[[10, 2], [8, 4], [5, 1], [3, 3], [0, 1]]
-        stack = deque()
+        stack = []
         #3. iterate through the list:
         for pos, speed in carVals:
             #4. Calculate and record time for each car to reach destination in the stack:
