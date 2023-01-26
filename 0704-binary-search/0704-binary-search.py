@@ -17,7 +17,7 @@ class Solution(object):
         
         
         while left <= right:
-            middle = (left + right) // 2
+            middle = left + ((right - left) // 2)
             if nums[middle] == target:
                 return middle #index
             if nums[middle] < target:
@@ -25,6 +25,7 @@ class Solution(object):
             elif nums[middle] > target:
                 right = middle - 1
         return -1
+    #TC: O(nlogn) SC: O(1)
         
             
         
