@@ -1,7 +1,7 @@
 class Solution(object):
     def minEatingSpeed(self, piles, h):
         left, right = 1, max(piles)
-        result = right
+        result = left
         while left <= right:
             hours = 0
             middle = left + ((right - left)//2)
