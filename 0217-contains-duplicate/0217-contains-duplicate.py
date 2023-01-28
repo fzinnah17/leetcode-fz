@@ -11,12 +11,14 @@ In a proper set implementation, membership tests are expected to run in fast O(1
         s= set(nums)
         if len(nums) != len(s):
             return True
-        return False
+        return False #TC: O(1) , SC: O(N)
+    
         # print(set(nums)) #[1,2,3]
         # print(len(set(nums))) #3
         
-#         hashMap = {}
         
+        #TC & SC: O(N)
+#         hashMap = {}
 #         for i in nums:
 #             if i in hashMap:
 #                 hashMap[i] += 1
