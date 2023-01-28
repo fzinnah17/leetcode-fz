@@ -14,3 +14,4 @@ class Solution(object):
                     return True
             else:
                 hashMap[i] = 1
+        return False
