@@ -17,6 +17,7 @@ class Solution(object):
         
         # print(str1)
         # print(str2)
+        #TC & SC: O(1) 
         
         
         
