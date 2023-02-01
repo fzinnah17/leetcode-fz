@@ -40,13 +40,11 @@ Bucket sort is mainly useful when input is uniformly distributed over a range.
             else:
                 f[freq].append(num)
         res = []
-        for i in range(len(nums),0,-1): # O(n)
+        for i in range(len(nums),0,-1): # O(n) [start,stop,step]
             if i in f:
-                res += f[i]
-        return res[:k] #[4,1]
+                res += f[i] #[4, 1, 2, 3, 7]
+        return res[:k] #[4,1] #The [:] makes a shallow copy of the array, hence allowing you to modify your copy without damaging the original. [:k] means 1st el to the kth el, but [k:] means kth el to the end
     
-        
-        
         #For testcase, [-1,-1] k = 1 
         #       d: defaultdict(<type 'int'>, {-1: 2}) 
         #       f: defaultdict(None, {2: [-1]})
