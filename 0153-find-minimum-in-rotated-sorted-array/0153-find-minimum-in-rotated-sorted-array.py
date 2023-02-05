@@ -32,6 +32,7 @@ class Solution(object):
                 left = middle + 1
             else:
                 right = middle - 1
+            #TC: O(logn) SC: O(1)
             
         
         
