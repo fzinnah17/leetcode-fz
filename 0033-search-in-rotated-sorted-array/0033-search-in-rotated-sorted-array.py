@@ -25,4 +25,6 @@ class Solution(object):
                 else:
                     right = middle - 1 
         return -1
+    
+    #TC: O(logn) SC:O(1)
             
