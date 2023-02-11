@@ -34,7 +34,7 @@ class Solution(object):
         elif list1 == None and list2 == None:
             return None
         return start.next
-    
+    #TC: O(n) SC: O(1)
     
     
     
