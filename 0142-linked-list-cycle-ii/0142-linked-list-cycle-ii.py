@@ -27,6 +27,12 @@ class Solution(object):
             return fast
         else:
             return
+        #TC: finding the cycle in a LinkedList with ‘N’ nodes: O(n)
+        #.   finding the length of the cycle: O(n)
+        #    find the start of the cycle: O(n) 
+        #Therefore, the overall time complexity of our algorithm will be O(N).
+        
+        #SC: O(1)
                     
             
                         
