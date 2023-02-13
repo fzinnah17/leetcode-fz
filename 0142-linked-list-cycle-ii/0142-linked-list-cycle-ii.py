@@ -12,8 +12,13 @@ class Solution(object):
             slow = slow.next
             fast = fast.next.next
             if slow == fast:
-                cycleLength += 1
-                break
+                current = slow
+                while True:
+                    current = current.next
+                    cycleLength += 1
+                    if current == slow:
+                        break
+                break #mandatory to break the loop
         if cycleLength > 0 and slow == fast:
             slow = head
             while fast != slow:
