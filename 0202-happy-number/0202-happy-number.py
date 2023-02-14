@@ -1,18 +1,14 @@
 class Solution(object):
     def isHappy(self, n):
-        """
-        :type n: int
-        :rtype: bool
-        """
-        def nextNum(num):
+        def nextNum(n):
             total = 0
-            while num > 0:
-                digit = num % 10
-                total += digit * digit
-                num //= 10
+            while n > 0:
+                remainder = n % 10
+                total += remainder * remainder
+                n //= 10
             return total
-        slow, fast = n, n
-    
+        
+        slow, fast = n,n
         while True:
             slow = nextNum(slow)
             fast = nextNum(nextNum(fast))
@@ -20,5 +16,3 @@ class Solution(object):
                 break
         return slow == 1
         
-        
-            
