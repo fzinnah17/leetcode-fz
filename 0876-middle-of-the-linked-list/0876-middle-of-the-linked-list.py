@@ -24,7 +24,7 @@ class Solution(object):
             else:
                 left += 1
                 head = head.next
-        return None
+        return None #TC: O(n) SC: O(1)
             
         
         # slow, fast = head, head
@@ -32,6 +32,8 @@ class Solution(object):
         #     slow = slow.next
         #     fast = fast.next.next
         # return slow
+        #TC: O(n) SC: O(1)
+        
             
             
         
