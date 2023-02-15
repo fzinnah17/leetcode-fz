@@ -19,12 +19,20 @@ class Solution(object):
                 curr = nxt
             return prev 
         def midElement(head):
-            fast = head
-            slow = head
-            while fast.next and fast.next.next:
-                fast = fast.next.next
-                slow = slow.next
-            return slow
+            length = 0
+            start = head
+            while start:
+                length += 1
+                start = start.next
+            left = 0
+            middle = length // 2
+            while head:
+                if left == middle:
+                    return head
+                else:
+                    left += 1
+                    head = head.next
+            return None
         
         firstHalf = midElement(head)
         secondHalf = firstHalf.next #initialize
