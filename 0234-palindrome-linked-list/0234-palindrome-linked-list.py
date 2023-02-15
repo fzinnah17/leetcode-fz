@@ -41,13 +41,14 @@ class Solution(object):
         result = True
         firstPointer = head
         secondPointer = secondHalf
-        while result and secondPointer != None :
+        while result and secondPointer:
             if firstPointer.val != secondPointer.val:
                 result = False
             firstPointer = firstPointer.next
             secondPointer = secondPointer.next
         firstHalf.next = reverseList(secondHalf)
         return result
+    #TC: O(N) SC: O(1)
         
             
         
