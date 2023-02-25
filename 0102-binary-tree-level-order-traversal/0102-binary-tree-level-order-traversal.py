@@ -18,7 +18,8 @@ class Solution(object):
                         c. If there is any children, then add it in the back of the queue
                 Repeat this process till the traversal is done for the tree
         5. Add the sublists into the actual final list
-        6. Return the final list           
+        6. Return the final list   
+        TC + SC: O(N)
         """
         if not root:
             return []
@@ -28,7 +29,7 @@ class Solution(object):
         
         while deque: #because now the deque has the root in it
             subList = []
-            for _ in range(len(deque)):
+            for i in range(len(deque)):
                 node = deque.popleft()
                 subList.append(node.val)
                 
