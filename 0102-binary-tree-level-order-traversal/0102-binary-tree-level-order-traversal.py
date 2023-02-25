@@ -25,7 +25,7 @@ class Solution(object):
             return []
         deque = collections.deque()
         deque.append(root)
-        output = []
+        output = collections.deque()
         
         while deque: #because now the deque has the root in it
             subList = []
