@@ -7,8 +7,17 @@
 class Solution(object):
     def zigzagLevelOrder(self, root):
         """
-        :type root: TreeNode
-        :rtype: List[List[int]]
+        TC + SC: O(n)
+        Pseudocode:
+            1. Use BFS ----> deque() to have leverage for FIFO and FILO.
+            2. Edge cases: empty
+            3. Append root to queue and traverse to find the subLists.
+                a. node val
+                        i. odd Level -----> LefttoRight
+                        ii. even Level -----> RighttoLeft
+                b. Add the children
+            4. Add the sub-lists in the output list
+            5. reverse the 
         """
         queue = collections.deque()
         output = collections.deque()
@@ -28,9 +37,9 @@ class Solution(object):
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            output.append(subLists)
-            oddLevel = not oddLevel
-        return output
+            output.append(subLists) # [[3],[9,20],[15,7]]
+            oddLevel = not oddLevel #after reversing [[3],[20,9],[15,7]]
+        return output 
             
                 
                 
