@@ -18,7 +18,7 @@ class Solution(object):
             return output
         while queue:
             subLists = collections.deque()
-            maxVal = float("-inf")
+            maxVal = -float("inf")
             for i in range(len(queue)):
                 node= queue.popleft()
                 subLists.append(node.val)
