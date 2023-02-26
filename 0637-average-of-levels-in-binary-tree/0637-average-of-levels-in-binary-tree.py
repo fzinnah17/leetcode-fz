@@ -19,11 +19,12 @@ class Solution(object):
             subLists = collections.deque()
             for i in range(len(queue)):
                 node = queue.popleft()
-                subLists.append(float(node.val))
+                subLists.append(node.val)
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            output.append((sum(subLists)) / (len(subLists)))
+            average = (float(sum(subLists))) / (float(len(subLists)))
+            output.append(average)
         return output
         
