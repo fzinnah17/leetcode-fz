@@ -14,6 +14,9 @@ class Solution(object):
                 B. check if not equal to target OR curr != 0 FALSE
         2. If NOT leaf node,
                 a. call recursion on left children and right children
+        TC : O(N) we visit each node exactly once
+        SC: BEST: (if the tree is perfectly balanced), the height of the tree would be log(N). So, the space complexity in this case would be O(log(N))
+            WORST: the tree is completely unbalanced, meaning that each node has only one child node. In this case, the recursion call would happen N times (the height of the tree), so the storage needed to keep the call stack would be O(N).
         """
         if not root:
             return False
