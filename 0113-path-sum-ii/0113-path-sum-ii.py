@@ -26,11 +26,4 @@ class Solution(object):
         for path in leftPath + rightPath:
             output.append([root.val]+path)
         return output
-            
-            
-            
-        # if root.left or root.right:
-        #     return self.pathSum(root, targetSum) or self.pathSum(root, targetSum)
-        
-        
         
