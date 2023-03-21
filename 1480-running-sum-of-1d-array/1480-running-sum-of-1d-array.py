@@ -1,9 +1,5 @@
 class Solution:
     def runningSum(self, nums: List[int]) -> List[int]:
-        """But how to optimize the solution? TC: O(n) SC: O(1)"""
-        for i in range(1,len(nums)):
-            nums[i] += nums[i-1]
-        return nums
         """
         Psedu-code:
         1. Create a list [], Initial sum 0
@@ -12,9 +8,15 @@ class Solution:
                 b. add the sum in the list
         3. return a list with all the sum
         TC and SC: O(n)"""
-        # output = []
-        # currSum = 0
-        # for i in range(len(nums)):
-        #     currSum += nums[i]
-        #     output.append(currSum)
-        # return output
+        output = []
+        elSum = 0
+        for i in range(len(nums)):
+            elSum += nums[i]
+            output.append(elSum)
+        return output
+        
+        """But how to optimize the solution? TC: O(n) SC: O(1)
+        for i in range(1,len(nums)):
+            nums[i] += nums[i-1]
+        return nums
+        """
