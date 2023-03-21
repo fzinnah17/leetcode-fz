@@ -13,6 +13,5 @@ TC: O(n) SC: O(n)
             else:
                 output.append(d)
                 d -= 1
-        output.append(i)
-        return output
+        return output + [i]
                 
