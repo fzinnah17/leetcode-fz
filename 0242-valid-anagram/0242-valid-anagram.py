@@ -17,6 +17,8 @@ class Solution(object):
         
         # print(str1)
         # print(str2)
+#         str1 = Counter({u'a': 3, u'r': 1, u'm': 1, u'g': 1, u'n': 1}) 
+#         str2 = Counter({u'a': 3, u'r': 1, u'm': 1, u'g': 1, u'n': 1})
         #TC & SC: O(1) 
         
         
