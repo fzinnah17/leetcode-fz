@@ -20,6 +20,9 @@ class Solution(object):
         4. Call the helper function with the outer function's root value
         5. return result
         I AM ALLOWED TO HAVE AS MANY ARGUMENTS INSIDE HELPER FUNCTION AS LONG AS I CALL IT IN THE OUTER FUNCTION. THOSE PARAMETERS SHOULD BE INITIALIZED FOR OUTER FUNCTION AS WELL
+        TC: O(n) we traverse all the nodes exactly once
+        SC: O(n) for recursion stack
+        Maximum number of function calls on the call stack at any point in time is equal to the height of the binary tree, which is O(n) in the worst case for an unbalanced tree.
         """
         output = []
         if not root:
