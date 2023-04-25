@@ -4,20 +4,19 @@ class Solution(object):
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
+        1. Hashmap = {}
+        2. iterate:
+            curr = target - arr[ind]
+            if curr not in hashMap:
+                add the index of that curr value in the hashMap
+            if it is in the hashMap:
+                return [index, hashMap[curr]]
         """
-        #[2,3,4,5,7] target = 11
-        # t
-        #{}
-        
         hashMap = {}
-        
         for i in range(len(nums)):
-            diff = target - nums[i]
-            if diff in hashMap:
-                return [hashMap[diff],i]
-            hashMap[nums[i]] = i
-            
-            
-            
-        
-        
+            curr = target - nums[i]
+            if curr not in hashMap:
+                hashMap[nums[i]] = i
+            else:
+                return [i, hashMap[curr]]
+            #TC: O(n) SC: O(n)
