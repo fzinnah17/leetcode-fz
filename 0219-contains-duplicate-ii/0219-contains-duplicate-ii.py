@@ -20,4 +20,5 @@ class Solution(object):
                         return True
             ii. if NOT > k:
                         update the previous index position with the current index position
-    3. return False if after traversing we see that there are no indices that meet the conditions given"""
+    3. return False if after traversing we see that there are no indices that meet the conditions given
+    TC: O(n) SC: O(n)"""
