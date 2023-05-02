@@ -14,12 +14,12 @@ Using binary search has a time complexity of O(log x), which is much better than
         left, right = 2, x
         while left <= right:
             middle = left + ((right - left) // 2)
-            if middle * middle == x:
+            if middle * middle == x: # 2 = sqrt(4) => 2^2 = 4
                 return middle
-            elif middle * middle > x:
+            elif middle * middle > x: # 5 > sqrt(4) => 5^2 = 4
                 right = middle - 1
             else:
-                left = middle + 1
+                left = middle + 1 # 1 < sqrt(4) => 1^2 = 4
         return right
     #TC: O(n) SC: O(1)
             
