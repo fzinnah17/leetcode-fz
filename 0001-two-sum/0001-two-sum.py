@@ -1,22 +1,24 @@
 class Solution(object):
     def twoSum(self, nums, target):
         """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        1. Hashmap = {}
-        2. iterate:
-            curr = target - arr[ind]
-            if curr not in hashMap:
-                add the index of that curr value in the hashMap
-            if it is in the hashMap:
-                return [index, hashMap[curr]]
+        TC: O(n) SC: O(n)
+        Pseudocode:
+        1. Initialize an empty dictionary
+        2. pointer i = 0
+        3. While loop to traverse the nums array
+        4. check if the curr is in the dictionary
+            if it is, then return the indices [dictionary[curr], i]
+        5. If not, then add the indices to the dictionary
+        6. incrememnt the i
+        7. return [] if none can be found
         """
+        i = 0
         hashMap = {}
-        for i in range(len(nums)):
+        while i < len(nums):
             curr = target - nums[i]
-            if curr not in hashMap:
-                hashMap[nums[i]] = i
-            else:
-                return [i, hashMap[curr]]
-            #TC: O(n) SC: O(n)
+            if curr in hashMap:
+                return [hashMap[curr], i]
+            hashMap[nums[i]] = i
+            i += 1
+        return []
+        
