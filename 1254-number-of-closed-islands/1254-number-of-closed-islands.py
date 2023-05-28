@@ -16,7 +16,7 @@ Space complexity is also O(n * m) in the worst case. This is because we use a se
             or row > Rows
             or col > Cols):
                 return 0
-            if grid[row][col] == 1 or (row,col) in visited:
+            if grid[row][col] == 1 or (row,col) in visited: #1 is water
                 return 1
             visited.add((row,col))
             return min(
@@ -26,7 +26,7 @@ Space complexity is also O(n * m) in the worst case. This is because we use a se
             helper(row, col - 1))
         for r in range(len(grid)):
             for c in range(len(grid[0])):
-                if not grid[r][c] and (r,c) not in visited:
+                if grid[r][c] == 0 and (r,c) not in visited:
                     result += helper(r,c)
         return result
         
