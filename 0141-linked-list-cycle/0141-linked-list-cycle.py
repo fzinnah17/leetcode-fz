@@ -26,14 +26,14 @@ if head is None:
     return None
 7. Time and space complexity: time complexity of O(N) and a space complexity of O(1)        
         """
-        slow = head
-        fast = head
-        if not head:
+        slow = head #Initialize the pointers
+        fast = head #Initialize the pointers
+        if not head: #Edge case
             return False
-        while fast and fast.next:
-            slow = slow.next
+        while fast and fast.next: #while loop condition
+            slow = slow.next #movement strategy
             fast = fast.next.next
-            if slow == fast:
+            if slow == fast: #Find cycles
                 return True
                 
         
