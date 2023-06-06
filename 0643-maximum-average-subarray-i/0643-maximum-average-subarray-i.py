@@ -20,8 +20,9 @@ class Solution(object):
             currSum += nums[i]
             
             if i >= k - 1:
-                currAvg = currSum / k
-                ans = max(ans, currAvg)
-                currSum -= nums[i - k + 1]
-                
+                currAvg = currSum / k #first find the average
+                ans = max(ans, currAvg) #update the average
+                currSum -= nums[i - k + 1]  #remove the first nums
+                #so they did it chronologically
         return ans
+    #TC: O(n) SC: O(1)
