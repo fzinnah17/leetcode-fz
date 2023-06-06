@@ -1,38 +1,27 @@
 class Solution(object):
     def findMaxAverage(self, nums, k):
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: float
-        1. Loop thru the array to take n = k elements
-        2. Move the window and subtract the n out of the bound.
-        3. Add the new n.
-        4. Variable to keep track of max value
-        5. Variable to keep track of current sum.
+        Pseudocode:
+        1. Initialize variables: max_avg, window_avg, window_sum, start
+        2. Iterate through nums:
+            a. Add the current number to window_sum
+            b. If the current index is greater than or equal to k - 1:
+                - Calculate the window average using window_sum divided by k
+                - Update max_avg with the maximum average encountered so far
+                - Subtract the element at nums[start] from window_sum to remove the first element of the window
+                - Increment start to slide the window
+        3. Return max_avg as the maximum average
         """
-        #current sum
+        ans = float('-inf')
+        currAvg = 0
         currSum = 0.0
-        #my starting sum is 0
-        startVal = 0
-        #it is adding all the subarray values
-        result = []
-        
-        #loop thru the array
+
         for i in range(len(nums)):
-            #Every time current sum is being added with each element
             currSum += nums[i]
-            #as long as the window exceeds k
-            if i >= k - 1:
-                #the result takes the average
-                result.append(currSum/k)
-                #remove the starting value
-                currSum -= nums[startVal]
-                #update the new start
-                startVal += 1
-        #all the average values are in the new array so will find the maximum of it
-        return max(result)
-    #TC: O(N), SC: O(N)
-                
             
-        
-        
+            if i >= k - 1:
+                currAvg = currSum / k
+                ans = max(ans, currAvg)
+                currSum -= nums[i - k + 1]
+                
+        return ans
