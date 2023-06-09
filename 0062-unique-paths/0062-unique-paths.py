@@ -12,7 +12,7 @@ class Solution(object):
         4. Check the Memoization Table: If a cached result exists, return it immediately.
         5. Perform Recursive Calls with the the Recursive Function: there's only choices of going down and right only. So does it mean we add up the previous two calls?
         6. Cache and Return the Result: Store the computed result in the memoization table for future use.
-        TC: O(m + n) for the number of grids to traverse
+        TC: O(m * n) because for each position (m, n), we make two recursive calls: one for (m - 1, n) and one for (m, n - 1).
         SC: O(m + n) for the memoTable
         """
         memoTable = {}
