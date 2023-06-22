@@ -1,33 +1,27 @@
 class Solution(object):
     def threeSum(self, nums):
         """
-        :type nums: List[int]
-        :rtype: List[List[int]]
         """
         nums.sort()
-        ans = []
-        for i in range(len(nums)): # leave two entry for pointer
-            if i > 0 and nums[i] == nums[i - 1]:
+        result = []
+        for ind, num in enumerate(nums):
+            if num > 0:
+                break
+            if ind > 0 and num == nums[ind - 1]:
                 continue
-            left = i + 1
+            left = ind+1
             right = len(nums) - 1
-            
-            while left < right:
-                
-                newSum = nums[left] + nums[right] + nums[i]
-                if newSum < 0:
+            while (left < right):
+                sum = num + nums[left] + nums[right]
+                if sum < 0:
                     left += 1
-                elif newSum > 0:
-                    right -= 1
+                elif sum > 0:
+                    right -=1
                 else:
-                    ans.append((nums[i],nums[left],nums[right]))
-                    while left < right and nums[left] == nums[left + 1]:
+                    result.append([num, nums[left], nums[right]])
+                    left += 1 
+                    right -= 1
+                    while nums[left] == nums[left - 1] and left < right:
                         left += 1
-
-                    left += 1
-        return ans
-                    
-                    
-                
-                
+        return result
         
