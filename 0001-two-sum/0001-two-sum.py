@@ -1,24 +1,15 @@
 class Solution(object):
     def twoSum(self, nums, target):
         """
-        TC: O(n) SC: O(n)
-        Pseudocode:
-        1. Initialize an empty dictionary
-        2. pointer i = 0
-        3. While loop to traverse the nums array
-        4. check if the curr is in the dictionary
-            if it is, then return the indices [dictionary[curr], i]
-        5. If not, then add the indices to the dictionary
-        6. incrememnt the i
-        7. return [] if none can be found
+TC & SC: O(N)
         """
-        i = 0
-        hashMap = {}
-        while i < len(nums):
-            curr = target - nums[i]
-            if curr in hashMap:
-                return [hashMap[curr], i]
-            hashMap[nums[i]] = i
-            i += 1
-        return []
-        
+        output = []
+        for i in range(len(nums)):
+            for j in range(i+1,len(nums)):
+                currSum = nums[i] + nums[j]
+                if currSum == target:
+                    output.append(i)
+                    output.append(j)
+        return output
+                    
+                
