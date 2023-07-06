@@ -2,14 +2,14 @@ class Solution(object):
     def merge(self, intervals):
         """
         Pseudocode:
-        Edge case: the intervals length <= 2 means just return the intervals itself.
+        Edge case: the intervals length <= 1 means just return the intervals array itself.
         1. sort the array based on the start values
-        2. variables
-        3. traverse the array:
-            a. current array start value > previous array end value:
-                    merge those
-            b. else: current array start value < previous array end value:
-                    append those in the output array
+        2. variables: output = [] we will compare the the first array as it doesn't have any previous so adding it in the output list initially.
+        3. traverse the array from the 1st index to the length:
+            a. current array start value < previous array end value:
+                    merge those by taking the max value
+            b. else: current array start value > previous array end value:
+                    append that array in the output array
         TC: O(nlogn) SC: O(n)
         """
         if len(intervals) <= 1:
