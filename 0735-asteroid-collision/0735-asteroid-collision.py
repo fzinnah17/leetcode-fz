@@ -31,23 +31,26 @@ class Solution(object):
             C. Set left to 0 to restart the iteration from the beginning. If we don't reset left to 0, the iteration will continue from its current position, which means it will skip some elements that may need to be reevaluated after a collision. This can lead to missing additional collisions and incorrect results.
         4. Return the updated asteroids list after all the collisions have been resolved.                       TC: O(n) SC: O(1)
         """
-        left = 0        
+        left = 0   
+        right = left + 1
         while left < len(asteroids) - 1: #not left <right what if there is no collisions at all
             curr = asteroids[left]
-            nxt = asteroids[left+1]
+            nxt = asteroids[right]
             if (
                 (curr < 0 and nxt < 0) or 
                 (curr >= 0 and nxt >= 0) or 
                 (curr < 0 and nxt >= 0)
             ):
                 left += 1
+                right = left + 1
             else:
                 if (abs(curr) == abs(nxt)):
-                    asteroids.pop(left + 1)
+                    asteroids.pop(right)
                     asteroids.pop(left)
                 elif (abs(curr) > abs(nxt)):
-                    asteroids.pop(left + 1)
+                    asteroids.pop(right)
                 else:
                     asteroids.pop(left)
                 left = 0
+                right = left + 1
         return asteroids
