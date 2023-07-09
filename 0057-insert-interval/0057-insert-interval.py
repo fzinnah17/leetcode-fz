@@ -16,6 +16,7 @@ class Solution(object):
         a. Iterate through the intervals in the stack:
             i. Append each interval to the output array: output.append(stack[i])
     7. Return the output array
+    TC: O(nlogn) SC: O(n)
         """
         intervals.append(newInterval)
         intervals.sort(key = lambda x : x[0])
@@ -32,8 +33,6 @@ class Solution(object):
         for i in stack:
             output.append(i)
         return output
-                
-        
         
         
         
