@@ -30,7 +30,7 @@ class Solution(object):
         2. DFS helps us explore a graph or a tree as deep as possible before backtracking, so we will use a helper function to traverse the cells of the matrix and explore their neighboring cells and backtrack to the cell:
             a. helper(r,c):
                 i. edge cases return nothing by not calling the helper function recursively(Handle edge cases by returning if the current cell is out of bounds, already visited, or represents water.):
-                    if (r < 0 or c < 0 or r >= Row or c >= Col or (r,c) in visited or grid[r][c] == "0"):
+                    if (r < 0 or c < 0 or r > Row or c > Col or (r,c) in visited or grid[r][c] == "0"):
                         return 
                 
                 ii. if the cells haven't been visited then add it:
