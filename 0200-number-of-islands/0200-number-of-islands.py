@@ -1,11 +1,11 @@
 class Solution(object):
     def numIslands(self, grid):
-        output, Rows, Cols, visited = 0, len(grid) - 1, len(grid[0]) - 1, set()
+        output, Rows, Cols, visited = 0, len(grid), len(grid[0]), set()
         def dfs(r,c):
             if (r < 0 or
                c < 0 or 
-               r > Rows or
-               c > Cols or
+               r >= Rows or
+               c >= Cols or
                grid[r][c] == "0" or
                (r,c) in visited):
                 return
@@ -14,8 +14,8 @@ class Solution(object):
             dfs(r - 1, c)
             dfs(r, c + 1)
             dfs(r, c - 1)
-        for row in range(len(grid)):
-            for col in range(len(grid[0])):
+        for row in range(Rows):
+            for col in range(Cols):
                 if grid[row][col] == "1" and (row,col) not in visited:
                     dfs(row,col)
                     output += 1
