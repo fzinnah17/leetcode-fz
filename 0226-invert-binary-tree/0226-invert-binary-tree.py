@@ -6,18 +6,13 @@
 #         self.right = right
 class Solution(object):
     def invertTree(self, root):
+        """
+        TC: O(1) SC: O(N) for recursion stack space
+        """
         if not root:
-            return root
-        queue = collections.deque()
-        queue.append(root)
-        
-        while queue:
-            node = queue.popleft()
-            node.left, node.right = node.right, node.left
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
+            return None
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        root.left, root.right = root.right, root.left
         return root
-            
         
