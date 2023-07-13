@@ -7,22 +7,21 @@
 class Solution(object):
     def rightSideView(self, root):
         """
-        TC + SC: O(N)
+        TC: O(n) SC: O(n)
         """
-        queue = collections.deque()
-        queue.append(root)
-        output = collections.deque()
-        if not root:
-            return output
-        while queue:
-            for i in range(len(queue)):
-                node= queue.popleft()
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-            output.append(node.val)
-        return output
-                
-        
+        rightSide = []
+        currLevel = deque()
+        if root:
+            currLevel.append(root)
+        while currLevel:
+            rightNode = currLevel[-1]
+            rightSide.append(rightNode.val)
+            nextLevel = deque()
+            for var in currLevel:
+                if var.left:
+                    nextLevel.append(var.left)
+                if var.right:
+                    nextLevel.append(var.right)
+            currLevel = nextLevel            
+        return rightSide
         
