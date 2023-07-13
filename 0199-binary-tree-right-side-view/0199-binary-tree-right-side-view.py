@@ -7,7 +7,7 @@
 class Solution(object):
     def rightSideView(self, root):
         """
-        TC: O(1) SC: O(n)
+        TC: O(n) SC: O(h)
         """
         rightSide = []
         
