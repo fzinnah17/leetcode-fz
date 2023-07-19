@@ -33,16 +33,16 @@ class Solution(object):
 
 
         """
-        Rows = len(image) - 1
-        Cols = len(image[0]) - 1
+        Rows = len(image)
+        Cols = len(image[0])
         visited = set()
         sourceColor = image[sr][sc]
         def helper(row, col, sourceColor):
             if (
             row < 0
             or col < 0
-            or row > Rows
-            or col > Cols
+            or row >= Rows
+            or col >= Cols
             or (row,col) in visited
             or image[row][col] != sourceColor):
                 return
