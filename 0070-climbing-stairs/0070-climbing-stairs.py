@@ -35,5 +35,5 @@ This shows that the number of ways to get to step n is dependent on the number o
             memoTable[n] = self.climbStairs(n-1) + self.climbStairs(n-2)
             return memoTable[n]
         
-        if n in memoTable:
-            return memoTable[n]
+        # if n in memoTable:
+        #     return memoTable[n]
