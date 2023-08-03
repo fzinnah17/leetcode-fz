@@ -25,6 +25,7 @@ class Solution(object):
         return dp(0)
 
 """
+this solution works with negative values: [5, 20, 15, -2, 18]
 if we are starting to rob from the end of the list then boundary needs to be changed to currHouse < 0 and dp has to be starting from len(nums - 1)
         memoTable = {}
         def dp(currHouse):
