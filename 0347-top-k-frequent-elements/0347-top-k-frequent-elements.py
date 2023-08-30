@@ -1,53 +1,25 @@
-from collections import defaultdict
-from collections import Counter
 class Solution(object):
     def topKFrequent(self, nums, k):
         """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        Brute Force: Iterate outer for loop k times and inner for loop n times to find the element that is most frequent and unique/not considered in any of the previous iterations
-Time: O(nk)
-Space: O(n) storing elements of nums with its frequency
-Bucket sort is mainly useful when input is uniformly distributed over a range.
+        Pseudocode:
+        1. Count all the numbers of the array TC: O(n)
+        2. Find the most common numbers based on the given parameter 'k' (value, #occurences) 
+        TC: O(n) SC: O(n) as it is returning a list
+        3. create an empty array to add the values to return later SC : O(n)
+        4. For loop to go over the most common number list TC: O(n)
+            a. append the first index of the tuples in that new array
+        5. Return the result array
+        
+        TC: O(n) + O(n) + O(n): O(n) = O(n) 
+        SC: O(n) + O(n) = O(n)
         """
-        #[4,4,1,3,1,4,2,7]
-        #[    1      2 3 4 5 6 7 8] #O(n) scanning
-        #[[3][2][7]  1 4 x x x x x]  ----> Buckets #O(n) scanning : WE ARE READING FROM RIGHT TO LEFT
-        #[[2,3,7]    1 4 x x x x x] 
-        #       k = 5  <----- RETURNING [4,1,2,3,7],     k = 2 <---- RETURNING [4,1]
-        #       k = 6 IS INVALID BECAUSE WE HAVE ONLY N NUMBERS < K  <------- #TC &SC: O(n)
-        
-        """Steps:
-        1. I am creating a table {key:values}
-            key: i(counts) ---> len(array)
-            values: numbers ---> numbers from the array
-        2. Insert the numbers
-        3. Sort the numbers
-        """    
-        if k == len(nums):
-            return nums
-        #[4,4,1,3,1,4,2,7]
-        #c = Counter(nums) #Counter({ 4: 3,    1: 2,    2: 1,    3: 1,    7: 1 }) unordered
-        d = collections.defaultdict(int) 
-                        #defaultdict(<type 'int'>, {1: 2,  2: 1,  3: 1,  4: 3,  7: 1}) ordered
-        for i in nums:
-            d[i] += 1 #ALTERNATIVE OF Counter
-        f = defaultdict()          # defaultdict({1: [2, 3, 7], 2: [1], 3: [4]})
-        for num, freq in d.items(): # O(n)
-            if freq not in f:
-                f[freq] = [num] 
-            else:
-                f[freq].append(num)
-        res = []
-        for i in range(len(nums),0,-1): # O(n) [start,stop,step]
-            if i in f:
-                res += f[i] #[4, 1, 2, 3, 7]
-        return res[:k] #[4,1] #The [:] makes a shallow copy of the array, hence allowing you to modify your copy without damaging the original. [:k] means 1st el to the kth el, but [k:] means kth el to the end
-    
-        #For testcase, [-1,-1] k = 1 
-        #       d: defaultdict(<type 'int'>, {-1: 2}) 
-        #       f: defaultdict(None, {2: [-1]})
-
-        
+        c = collections.Counter(nums)
+        commonNum = c.most_common(k)
+        # print(c.most_common(k)) [(1,3), (2,2)]
+        result = []
+        for i in commonNum:
+            result.append(i[0])
+        return result
+            
+        # return [i[0] for i in commonNum] list comprehension line
         
