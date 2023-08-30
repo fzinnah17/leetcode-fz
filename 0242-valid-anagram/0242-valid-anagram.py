@@ -1,13 +1,8 @@
 class Solution(object):
     def isAnagram(self, s, t):
         """
-        Counter is a frequency table. It is an object. 
-        Key       :     Values
-        char/num  :     Frequency
+        TC: O(n) SC: O(n)
         """
-        s = collections.Counter(s)
-        t = collections.Counter(t)
-        if s == t:
+        if Counter(s) == Counter(t):
             return True
         return False
-        
