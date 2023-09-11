@@ -1,30 +1,38 @@
-class Solution(object):
-    def isValid(self, s):
+class Solution:
+    def isValid(self, s: str) -> bool:
         """
-        :type s: str
-        :rtype: bool
-        To solve this we traverse through each character of string which consists of sign {}()[] only. When an open parenthesis comes like {, [, (  we push it into the stack. And when the closing parenthesis comes like }, ], )  we compare it from the top of the stack. If the closing parenthesis matches with the top of stack then we pop the character from the stack otherwise we return false.
+        Pseudocode:
+        1. Edge case: odd length of the string: missing bracket -> False
+        2. variables: 
+            deque() for faster add/removal from both end, 
+            hashmap to keep track of the brackets hashMap[key] = value {key : value} 
+            key = )}] value = ({[
+        3. for loop iterate over the string:
+                a. if the closing bracket/key is found:
+                        if stack exists:
+                            remove the element
+                        else:
+                            dummy value
+                            removed element != hashmap key(if not):
+                                False
+                b. add the parentheses
+        4. if stack still exists with any brackets -> False
+            else True
+        TC: O(n) SC: O(n)                                                          
         """
-        from collections import deque
+        if len(s) % 2 != 0:
+            return False
         stack = deque()
-        
-        for c in s:
-            if c == "(" or c == "{" or c == "[":
-                stack.append(c)
-            elif len(stack): #it means something is in the stack so I can check for closing parentheses
-                el = stack.pop()
-                if el == "(" and c != ")":
-                    return False
-                if el == "{" and c != "}":
-                    return False
-                if el == "[" and c != "]":
+        #key = )}] value = ({[
+        bracketMap = {')' : '(', '}' : '{', ']' : '['}
+        for i in s:
+            if i in bracketMap: #i is the closing parantheses for this condition, As you traverse the string s, you're more interested in checking if a closing bracket matches the last seen opening bracket (which would be on top of the stack).
+                topBracket = stack.pop() if stack else '#'
+                if bracketMap[i] != topBracket: 
                     return False
             else:
-                return False #if I am starting with closed parentheses
+                stack.append(i)
         if len(stack):
             return False
         return True
-                
-            
-                
-        
+                    
