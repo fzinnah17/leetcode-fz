@@ -1,27 +1,28 @@
-from collections import deque
-class Solution(object):
-    def evalRPN(self, tokens):
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
         """
-        :type tokens: List[str]
-        :rtype: int
-        """
-        stack = collections.deque()
-        for i in tokens:
-            if i in "+-*/":
-                first = stack.pop()
-                second = stack.pop()
-                if i == "+":
-                    stack.append(int(first) + int(second))
-                elif i == "-":
-                    stack.append(int(second) - int(first))
-                elif i == "*":
-                    stack.append(int(first) * int(second))
-                elif i == "/":
-                    stack.append(int(int(second) / float(first)))
-            else:
-                stack.append(int(i))
-        return stack[-1]
-            # if i = "+" or i = "-" or i = "*" or i = "/":
-                
+        TC: O(n)
+        SC: O(n)"""
+        stack = deque()
         
+        def helper(operator):
+            return operator in ["+", "-", "*", "/"]
+        
+        for t in tokens:
+            if helper(t):
+                a = stack.pop()
+                b = stack.pop()
+                if t == "+":
+                    stack.append(a + b)
+                elif t == "-":
+                    stack.append(b - a)
+                elif t == "*":
+                    stack.append(b * a)
+                elif t == "/":
+                    stack.append(int(b / a))
+            else:
+                stack.append(int(t))
+        return stack[0]
+                    
+            
         
