@@ -1,22 +1,21 @@
-class Solution(object):
-    def removeDuplicates(self, nums):
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
         """
-        Things to notice:
-        1. The nums array is sorted
-        
-        Things asked me to do:
-        1. Remove the duplicates in space -> SC: O(1) can't use additional memory
-        2. The order of the array should be the same
-        3. Return the length of the new array
-        
+        1. array is sorted increasingly/order cant be changed
+        2. remove the duplicates in place
+        3. each element appears only once  <- return it
+        4. 
+        Input: nums = [0,0,1,1,1,2,2,3,3,4]
+                       i
+                       j
+        Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
         Pseudocode:
-        1. a pointer i = 0
-        2. while loop to traverse the array
-        3. check conditions:
-            if i and [ i+ 1 ] is same, then remove i + 1 using the pop method as it is already a list aka stack
-            if it is not the same, then increment i by i += 1 knowing it is sorted
-        4. return i + 1 because i is in the last unique element
-        #TC: O(n) SC: O(1)
+        1. two pointers
+        2. while loop
+            if i and j values match:
+                j += 1
+                swap j value with it's previous val
+  
         """
         i = 0
         while i < len(nums) - 1:
@@ -24,5 +23,6 @@ class Solution(object):
                 nums.pop(i+1)
             else:
                 i += 1
-        return i+1 #it is because at the end of the iteration, i is in the last unique element
+        return i+1
+            
         
