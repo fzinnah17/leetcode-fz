@@ -5,24 +5,25 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        
         left = 0
         right = len(nums) - 1
         
         while left <= right:
-            middle = left + ((right - left) // 2) #[4,5,6,7,0,1,2] -> midVal = 7
-            #if midVal = target: return midVal
+            middle = left + ((right - left) // 2)
+            #nums = [4,5,6,7,0,1,2], target = 5
             if nums[middle] == target:
                 return middle
-            if nums[left] <= nums[middle]:
-                if nums[left] <= target <= nums[middle]:
+            if nums[middle] >= nums[left]: #check if target is in the left side or to the right side
+                if nums[middle] < target or target < nums[left]:
+                    left = middle + 1
+                else:
+                    right = middle - 1
+            else:
+                #if nums[middle] < nums[left]
+                if nums[middle] > target or target > nums[right]:
                     right = middle - 1
                 else:
                     left = middle + 1
-            else:
-                if nums[middle] <= target <= nums[right]:
-                    left = middle + 1
-                else:
-                    right = middle - 1 
         return -1
-        #TC: O(logn) SC:O(n)
+                
+        
