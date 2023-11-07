@@ -14,6 +14,7 @@ class Solution:
         top = list1Head
         bottom = list2Head
         
+        #edge cases:
         if not top:
             return bottom
         if not bottom:
