@@ -1,16 +1,22 @@
 class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-        end_node = len(graph) - 1
-        
-        def dfs(node, path, result):
+        adjList = collections.defaultdict(list)
+        for node in range(len(graph)):
+            adjList[node] = graph[node]
+
+        target = len(graph) - 1
+        results = []
+
+        def dfs(node, path):
+            if node == target:
+                results.append(path.copy())
+                return
             
-            if node == end_node:
-                result.append(path)
-                
-            for neighbour in graph[node]:
-                dfs(neighbour, path + [neighbour], result)
-                
-        result = []
-        dfs(0, [0], result)
-        return result
+            for next_node in adjList[node]:
+                path.append(next_node)
+                dfs(next_node, path)
+                path.pop()
+
+        dfs(0, [0])
+        return results
         
