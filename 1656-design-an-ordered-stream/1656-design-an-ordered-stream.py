@@ -16,7 +16,8 @@ class OrderedStream:
             self.pointer += 1
             
             
-        self.pointer = self.pointer
+        self.pointer = self.pointer #keeps track of the next expected ID in the sequence
+        #This ensures that the next time insert is called, the method knows the correct starting point to look for the next consecutive elements.
         return result #for the first message as we did not find person 1's message we will return empty []
         #1st loopseen = {3: "Person 3 Message"}
         
