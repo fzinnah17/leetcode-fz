@@ -12,7 +12,6 @@ class OrderedStream:
             #nothing inside will run for the first message not being from person 1 as it's not found in the dictionary
             result.append(self.seen[self.pointer])
             #our pointer is still in 1st person and we found the first person's message so we will return that message inside the []
-            del self.seen[self.pointer] #delete the value from the dictionary because we know that now that string is a part of the ordered sequence. Deleting makes sure that the pointer can move next. Otherwise, pointer will have an infinite loop by finding the same id. It is memory efficient too. It makes sure that the id is proicessed only once according to the description. 
             self.pointer += 1
             
             
