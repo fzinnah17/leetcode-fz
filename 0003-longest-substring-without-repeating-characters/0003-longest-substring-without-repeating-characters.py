@@ -1,19 +1,24 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        """
-        """
-        res = 0
-        right = 0
-        left = 0
-        stringSet = set()
-
+        output = 0
+        left, right = 0, 0
+        
+        visited = set()
+        # "abcabcbb"
+      # set = b, c, a, 
+        
         while right < len(s):
-            if s[right] not in stringSet:
-                stringSet.add(s[right])
-                res = max(res, right - left + 1)
+            #sliding window
+            if s[right] not in visited:
+                visited.add(s[right])
+                output = max(output, right - left + 1)
+            #right pointer moves
                 right += 1
             else:
-                stringSet.remove(s[left])
+                visited.remove(s[left])
                 left += 1
-        return res
+        return output
+                
+            
+        
         
