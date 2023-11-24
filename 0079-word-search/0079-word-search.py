@@ -22,7 +22,7 @@ class Solution:
                    dfs(r - 1, c, pointer + 1) or
                    dfs(r, c + 1, pointer + 1) or
                    dfs(r, c - 1, pointer + 1))
-            visited.remove((r, c))
+            visited.remove((r, c)) #backtracking
             return res
 
         # Iterate through the grid to find the starting point for the word.
