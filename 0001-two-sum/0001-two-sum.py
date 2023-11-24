@@ -1,13 +1,11 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        numDict = {}
-        
+        numsMap = {}
         for i in range(len(nums)):
             comp = target - nums[i]
-            
-            if comp not in numDict:
-                numDict[nums[i]] = i
+            if comp not in numsMap:
+                numsMap[nums[i]] = i
             else:
-                return [i, numDict[comp]]
-        
+                return [i,numsMap[comp]]
+        #  Time: O(n) Space: O(n)
         
