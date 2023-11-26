@@ -1,33 +1,25 @@
 class Solution:
-    def invalidTransactions(self, transactions: List[str]) -> List[str]:
-        invalid = []
-        transactionList = defaultdict(list)
+    def invalidTransactions(self, trans: List[str]) -> List[str]:
         
-        for i in transactions:
-            name, time, amount, city = i.split(",")
-            transactionList[name].append([time,amount,city]) #hashmap[key] = [value]
-        """{'alice': [
-                     ['20', '800', 'mtv'], 
-                     ['50', '100', 'beijing']
-                     ]}
-"""
+        hmap = {}
+        invalid_indices = set()
         
-        for j in range(len(transactions)):
-            name, time, amount, city = transactions[j].split(",")
-            """alice 20 800 mtv
-               alice 50 100 beijing"""
-            if int(amount) > 1000:
-                invalid.append(transactions[j])
-            else:
-                for trans in transactionList[name]:
-                    t, a, c = trans
-                    if c != city and abs(int(t)-int(time)) <= 60:
-                        invalid.append(transactions[j])
-                        break
-        return invalid
-    """TC: O(n^2) SC: O(n)"""
+        for i, t in enumerate(trans):
+            name, time, amount, city = t.split(',')
+            if name not in hmap:
+                hmap[name] = []
+            hmap[name].append((i, int(time), int(amount), city))
+
+#         alice -> [[1, 20, 800, mtv], []]
+        for name, transactions in hmap.items():
+            for i, (idx1, time1, amount1, city1) in enumerate(transactions):
                 
-                
-                
-        
-        
+                if amount1 > 1000:
+                    invalid_indices.add(idx1)
+                    
+                for j, (idx2, time2, amount2, city2) in enumerate(transactions):
+                    if i != j and abs(time1 - time2) <= 60 and city1 != city2:
+                        invalid_indices.add(idx1)
+                        invalid_indices.add(idx2)
+            
+        return [trans[i] for i in invalid_indices]
