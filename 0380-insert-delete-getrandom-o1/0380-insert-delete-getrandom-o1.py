@@ -1,38 +1,35 @@
-import random
-
 class RandomizedSet:
+
     def __init__(self):
-        # Initialize a list to store the elements and a dictionary to map element values to their indices in the list
-        self.list = []
-        self.dict = {}
-
+        self.numList = []
+        self.numMap = {}
+    
     def insert(self, val: int) -> bool:
-        # Check if the value is already in the set (dict)
-        if val in self.dict:
-            return False  # Return false if the value is already present
-
-        # Add the value to the list and store its index in the dict
-        self.list.append(val)
-        self.dict[val] = len(self.list) - 1
-        print(dict[val], "->", len(self.list) - 1)
-        return True  # Return true indicating successful insertion
+        if val in self.numMap:
+            return False
+        self.numList.append(val)
+        self.numMap[val] = len(self.numList) - 1
+        return True
 
     def remove(self, val: int) -> bool:
-        # Check if the value is in the set (dict)
-        if val not in self.dict:
-            return False  # Return false if the value is not present
-
-        # Swap the value with the last element in the list for efficient removal
-        last_element = self.list[-1]
-        idx = self.dict[val]
-        self.list[idx], self.list[-1] = self.list[-1], self.list[idx]
-        self.dict[last_element] = idx
-
-        # Remove the value from the list and dict
-        self.list.pop()
-        del self.dict[val]
-        return True  # Return true indicating successful removal
+        if val not in self.numMap:
+            return False
+        lastElement = self.numList[-1]
+        idx = self.numMap[val]
+        self.numList[idx] = lastElement
+        self.numMap[lastElement] = idx
+        
+        self.numList.pop()
+        del self.numMap[val]
+        return True
 
     def getRandom(self) -> int:
-        # Return a random element from the list
-        return random.choice(self.list)
+        return random.choice(self.numList)
+        
+
+
+# Your RandomizedSet object will be instantiated and called as such:
+# obj = RandomizedSet()
+# param_1 = obj.insert(val)
+# param_2 = obj.remove(val)
+# param_3 = obj.getRandom()
