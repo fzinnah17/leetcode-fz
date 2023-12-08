@@ -1,26 +1,33 @@
-class Solution(object):
-    from collections import deque
-    def dailyTemperatures(self, temperatures):
-        w = len(temperatures)
-        result, stack = [0]*w, deque()
-        for i in range(w):
-            while stack and temperatures[stack[-1]] < temperatures[i]:
-                index = stack.pop()
-                result[index] = i-index
-            stack.append(i)
-        return result
+class Solution:
+    def dailyTemperatures(self, temps: List[int]) -> List[int]:
         """
-        :type temperatures: List[int]
-        :rtype: List[int]
-        In this problem, we are given a list of temperatures, where the temperature at index I is the temperature for the ith day. Our goal is to calculate how many days it will take until the next day is warmer than the current day for each day. When attempting to solve a problem, a brute-force approach is frequently the best place to start. The simplest or brute-force solution is to go through the array and, for each day, go through all the other days until you find one with a higher temperature. Because N105 constraints are in place, this method would take O(N2) time, which is extremely slow. What's the issue about using brute force?
-        I built a nested loop. I iterate through each element in the outer loop, and in the inner loop, I search the remainder of the list for the next greater value to the current element.
-
-The issue here is that this brute force algorithm has a lot of redundant operations that need to be eliminated, so we should try only to visit each element once.
-https://liuzhenglaichn.gitbook.io/algorithm/monotonic-stack
-The [0] * x creates a list with x elements. So,
-
->>> [ 0 ] * 5
-[0, 0, 0, 0, 0]
-        """
-            
         
+        stack = [73, 74, 75, 71, 69, 72, 76 ]
+        maxStack = [73, 74, 75]
+        check if the next added temp to maxStack is greater or less than the current day temparature in the stack
+        if greater than 1 day
+        if not: count += 1
+        output = [1, 1, 4, ]"""
+        output = [0] * len(temps)
+        stack = []
+        stack.append((0, temps[0]))
+        
+        for i in range(1, len(temps)):
+            currTemp = temps[i]
+            # print("Current Temperature: ", temps[i])
+            while stack:
+                prevTemp = stack[-1][1]
+                prevIndex = stack[-1][0]
+                # print("Prev Temp & Index: ", stack[-1][1], "&", stack[-1][0])
+                if currTemp > prevTemp:
+                    # print("Stack: ", stack)
+                    output[prevIndex] = i - prevIndex
+                    stack.pop()
+                    # print("i: ", i)
+                    # print("i - prevIndex = ", i - prevIndex)
+                    # print()
+                else:
+                    break
+             
+            stack.append((i, temps[i]))
+        return output
