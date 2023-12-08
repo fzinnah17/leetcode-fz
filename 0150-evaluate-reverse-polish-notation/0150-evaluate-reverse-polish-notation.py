@@ -23,6 +23,5 @@ class Solution:
                 elif i == "/":
                     res = int(prevNum / lastNum)
                 stack.append(res)
-        if stack:
-            return int(stack[0])
+        return int(stack[0])
                         
