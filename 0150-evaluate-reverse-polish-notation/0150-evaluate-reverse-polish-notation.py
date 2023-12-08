@@ -1,28 +1,28 @@
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
         """
-        TC: O(n)
-        SC: O(n)"""
-        stack = deque()
+        we can keep on adding the integers to the stack
+        as soon as we find a valid operator we take out the last two numbers, do that operation
+        add that operation to the result that we will return"""
         
-        def helper(operator):
-            return operator in ["+", "-", "*", "/"]
-        
-        for t in tokens:
-            if helper(t):
-                a = stack.pop()
-                b = stack.pop()
-                if t == "+":
-                    stack.append(a + b)
-                elif t == "-":
-                    stack.append(b - a)
-                elif t == "*":
-                    stack.append(b * a)
-                elif t == "/":
-                    stack.append(int(b / a))
-            else:
-                stack.append(int(t))
-        return stack[0]
-                    
-            
-        
+        stack = []
+        res = 0
+
+        for i in tokens:
+            if i.lstrip('-').isdigit():
+                stack.append(int(i))
+            elif i in ["+", "-", "*", "/"]:
+                lastNum = stack.pop()
+                prevNum = stack.pop()
+                if i == "+":
+                    res = prevNum + lastNum
+                elif i == "-":
+                    res = prevNum - lastNum
+                elif i == "*":
+                    res = prevNum * lastNum
+                elif i == "/":
+                    res = int(prevNum / lastNum)
+                stack.append(res)
+        if stack:
+            return int(stack[0])
+                        
