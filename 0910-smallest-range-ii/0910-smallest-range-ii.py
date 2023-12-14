@@ -15,13 +15,9 @@ class Solution:
             if i == len(nums) - 1:
                 break
 
-            # Calculate lower and upper bounds at the current index
-            lowerBoundAtCurrent = nums[i] - k
-            upperBoundAtCurrent = nums[i] + k
-
             # Calculate the potential new minimum and maximum of the array
             potentialNewMin = min(nums[0] + k, nums[i + 1] - k)
-            potentialNewMax = max(nums[-1] - k, upperBoundAtCurrent)
+            potentialNewMax = max(nums[-1] - k, nums[i] + k)
 
             # Calculate the new range and update the result if it's smaller
             newRange = potentialNewMax - potentialNewMin
