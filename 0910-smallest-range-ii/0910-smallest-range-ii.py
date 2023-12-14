@@ -1,24 +1,26 @@
 class Solution:
     def smallestRangeII(self, nums: List[int], k: int) -> int:
+        # Sort the list first to handle the sequence in an ordered manner
         nums.sort()
-        res = nums[-1] - nums[0]  # Initial range
+
+        # Calculate the initial range of the array
+        originalRange = nums[-1] - nums[0]
         
+        # Initialize the result with the original range
+        result = originalRange
+
+        # Iterate through the array
         for i in range(len(nums) - 1):
-            # Current number is nums[i]
-            a = nums[i]
-            b = nums[i + 1]
-            
-            # Scenario 1: Increase all previous elements by k
-            max_val_1 = max(nums[-1] - k, a + k)
-            min_val_1 = min(nums[0] + k, b - k)
-            range_1 = max_val_1 - min_val_1
-            
-            # Scenario 2: Decrease all previous elements by k
-            max_val_2 = max(a - k, nums[-1] + k)
-            min_val_2 = min(nums[0] - k, b + k)
-            range_2 = max_val_2 - min_val_2
+            # Calculate lower and upper bounds at the current index
+            lowerBoundAtCurrent = nums[i] - k
+            upperBoundAtCurrent = nums[i] + k
 
-            # Choose the smallest range
-            res = min(res, range_1, range_2)
+            # Calculate the potential new minimum and maximum of the array
+            potentialNewMin = min(nums[0] + k, nums[i + 1] - k)
+            potentialNewMax = max(nums[-1] - k, upperBoundAtCurrent)
 
-        return res
+            # Calculate the new range and update the result if it's smaller
+            newRange = potentialNewMax - potentialNewMin
+            result = min(result, newRange)
+
+        return result
