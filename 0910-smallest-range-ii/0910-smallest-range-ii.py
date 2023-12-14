@@ -5,8 +5,6 @@ class Solution:
 
         # Calculate the initial range of the array
         originalRange = nums[-1] - nums[0]
-        maxNum = nums[-1] - k
-        minNum = nums[0] + k
         
         # Initialize the result with the original range
         result = originalRange
@@ -18,9 +16,9 @@ class Solution:
                 break
 
             # Calculate the potential new min and max
-            newMin = min(minNum, nums[i + 1] - k)
+            newMin = min(nums[0] + k, nums[i + 1] - k)
             #nums[i] < nums[i + 1] that's why minimize the i + 1 value
-            newMax = max(maxNum, nums[i] + k)
+            newMax = max(nums[i] + k, nums[-1] - k)
 
             # Calculate the new range and update the result if it's smaller
             result = min(result, newMax - newMin)
