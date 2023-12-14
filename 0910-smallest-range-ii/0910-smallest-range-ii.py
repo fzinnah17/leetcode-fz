@@ -10,7 +10,11 @@ class Solution:
         result = originalRange
 
         # Iterate through the array
-        for i in range(len(nums) - 1):
+        for i in range(len(nums)):
+            # When i is the last index, break the loop as we can't use nums[i + 1]
+            if i == len(nums) - 1:
+                break
+
             # Calculate lower and upper bounds at the current index
             lowerBoundAtCurrent = nums[i] - k
             upperBoundAtCurrent = nums[i] + k
