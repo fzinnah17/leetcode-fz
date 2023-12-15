@@ -1,6 +1,6 @@
 class Solution:
     def smallestRangeI(self, nums: List[int], k: int) -> int:
-        """
+        """       
             Example 1 -> nums = [0,10], k = 2
             choosing i means
             i -> [0, len(nums) = 2]
