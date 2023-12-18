@@ -1,20 +1,20 @@
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        """
-        1. Create an empty dictionary to store anagram groups.
-        2. For each word in the input:
-           a. Sort the words and join them back together
-           b. Check if it is already a key in map.
-               I. If not, create a new entry as the key and a list containing as the value.
-               II. If already in map, append `word` to the list of values associated with that key.
-        3. After processing all words, return a list containing the values (lists of words) from the dictionary.
-"""
-        sMap = {}
-        for w in strs:
-            sortStrs = "". join(sorted(w))
-            if sortStrs not in sMap:
-                sMap[sortStrs] = [w]
+    def groupAnagrams(self, strs):
+        result = {}
+        for s in strs:
+            char_count = {}  # key = character, count = frequency
+            for ch in s:
+                if ch not in char_count:
+                    char_count[ch] = 1
+                else:
+                    char_count[ch] += 1
+            key = tuple(sorted(char_count.items()))
+            
+            if key not in result:
+                result[key] = [s]  # Initialize a list for this character count
             else:
-                sMap[sortStrs]. append(w)
-        return sMap.values()
+                result[key].append(s)
+            
+        groupedAnagrams = list(result.values())
         
+        return groupedAnagrams
