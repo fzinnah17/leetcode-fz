@@ -16,32 +16,22 @@ class Solution:
         Row = len(board)
         Col = len(board[0])
         
-        rowVisited = []
-        for _ in range(Row):
-            rowVisited.append(set())
+        rowVisited = defaultdict(set)
+        colVisited = defaultdict(set)
+        squareVisited = defaultdict(set)
 
-        colVisited = []
-        for _ in range(Col):
-            colVisited.append(set())
-
-        squareVisited = []
-        for _ in range(9):
-            squareVisited.append(set())
-
-        
-        def checkRow(row, num):
-            if num in rowVisited[row]:
+        def checkRow(r, num):
+            if num in rowVisited[r]:
                 return False
             return True
         
-        def checkCol(col, num):
-            if num in colVisited[col]:
+        def checkCol(c, num):
+            if num in colVisited[c]:
                 return False
             return True
 
-        def checkSquare(row, col, num):
-            square = (row // 3) * 3 + col // 3
-            if num in squareVisited[square]:
+        def checkSquare(r,c,num):
+            if num in squareVisited[(r//3,c//3)]:
                 return False
             return True
 
@@ -58,6 +48,5 @@ class Solution:
                     return False
                 rowVisited[r].add(board[r][c])
                 colVisited[c].add(board[r][c])
-                square = (r // 3) * 3 + c // 3
-                squareVisited[square].add(board[r][c])
+                squareVisited[(r//3,c//3)].add(board[r][c])
         return True
