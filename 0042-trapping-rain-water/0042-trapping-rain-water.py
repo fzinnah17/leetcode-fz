@@ -17,23 +17,24 @@ class Solution:
             b. If left_max is less than right_max, water can be trapped at left position, so add left_max - h[left] to res, and move the left pointer.
             c. Otherwise, water can be trapped at right position, so add right_max - h[right] to res, and move the right pointer.          
         """
-        res = 0
+        if not h:
+            return 0
+
         left, right = 0, len(h) - 1
-        leftMax, rightMax = 0, 0
-        
-        while left <= right:
-            if h[left] < h[right]:
-                if h[left] > leftMax:
-                    leftMax = h[left]
-                else:
-                    res += leftMax - h[left]
+        leftMax, rightMax = h[left], h[right]
+        res = 0
+
+        while left < right:
+            leftMax = max(leftMax, h[left])
+            rightMax = max(rightMax, h[right])
+
+            if leftMax <= rightMax:
+                res += leftMax - h[left]
                 left += 1
             else:
-                if h[right] > rightMax:
-                    rightMax = h[right]
-                else:
-                    res += rightMax - h[right]
+                res += rightMax - h[right]
                 right -= 1
+
         return res
             
         
