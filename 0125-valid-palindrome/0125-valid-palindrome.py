@@ -21,16 +21,17 @@ class Solution:
         
         left, right = 0, len(s) - 1
         
-        def helper(i, direction):
-            while 0 <= i < len(s) and not s[i].isalnum():
-                i += direction
-            return i
+        def helper(ch):
+            return ch.isalpha() or ch.isdigit()
         
         while left < right:
-            left = helper(left, 1)
-            right = helper(right, -1)
+            while left < right and not helper(s[left]):
+                left += 1
+                
+            while left < right and not helper(s[right]):
+                right -= 1
             
-            if left < right and s[left] != s[right]:
+            if s[left] != s[right]:
                 return False
             
             left += 1
