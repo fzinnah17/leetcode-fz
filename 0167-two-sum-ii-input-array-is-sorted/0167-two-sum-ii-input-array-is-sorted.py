@@ -1,19 +1,15 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        """
-        return indices
-        sorted -> binary search
-        """
-        l = 0
-        r = len(nums) - 1
+        left, right = 0, len(nums) - 1
         
-        while l < r:
-            curr = nums[l] + nums[r]
+        while left < right:
+            curr = nums[left] + nums[right]
             
             if curr == target:
-                return [l + 1, r + 1]
+                return [left + 1, right + 1]
             elif curr > target:
-                r -= 1
+                right -= 1
             else:
-                l += 1
+                left += 1
+            
         
