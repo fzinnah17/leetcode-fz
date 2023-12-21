@@ -1,39 +1,39 @@
-class Solution(object):
-    def trap(self, height):
+class Solution:
+    def trap(self, h: List[int]) -> int:
         """
-        Pseudocode:
-        1. variables: 
-            a. left = 0, right = len(array) - 1 as it reference both sides of the array
-            b. water = 0
-            c. leftMax = array[left] maximum bar heights encountered so far from the left side
-            d. rightMax = array[right] maximum bar heights encountered so far from the left side
-        2. Traverse the array from left to right using while loop:
-            while left < right:
-            The idea is to compare both leftMax and rightMax to see where the water is trapped
-            a. if rightMax > leftMax:
-                the water should depend on the left bar as the left bar is small
-                i. left += 1
-                ii. update the rightMax using the max function. max(maxLeft,array[left])
-                iii. calculate the water: water += maxLeft - array[left]
-            b. else: rightMax < leftMax:
-                the water should depend on the right bar as the right bar is small
-                i. right -= 1
-                ii. update the rightMax using the max function. max(maxRight,array[right])
-                iii. calculate the water: water += maxRight - array[right]
-        3. Return the water variable
-        TC: O(n) SC: O(1)
-        """
-        left, right = 0, len(height) - 1
-        water, leftMax, rightMax = 0, height[left], height[right]
+        Two pointers concept is used in: 
+        a. Optimizing algorithms for processing large files or streams, like handling large JSON responses in a REST API.
+        b. Optimizing memory usage in file uploads or streaming services.
+        c. For example, when reading and parsing a large log file, you can use two pointers to keep track of the current position and process the file in chunks, reducing memory usage and improving performance.
+        d.  Instead of loading the entire file into memory, you can use two pointers to read and process the file in smaller segments, reducing the memory footprint of your application.
         
-        while left < right:
-            if rightMax > leftMax:
+        For this problem, it is used as:
+        
+        Pseudocode:
+        1. Keep two variables left_max and right_max to track the maximum height from the left and right sides of the current element.
+        2. Use two pointers, left and right, starting from the beginning and end of the array.
+        3. While the left pointer is less than or equal to the right pointer:
+            a. Update left_max and right_max with the current maximum heights from left and right.
+            b. If left_max is less than right_max, water can be trapped at left position, so add left_max - h[left] to res, and move the left pointer.
+            c. Otherwise, water can be trapped at right position, so add right_max - h[right] to res, and move the right pointer.          
+        """
+        res = 0
+        left, right = 0, len(h) - 1
+        leftMax, rightMax = 0, 0
+        
+        while left <= right:
+            if h[left] < h[right]:
+                if h[left] > leftMax:
+                    leftMax = h[left]
+                else:
+                    res += leftMax - h[left]
                 left += 1
-                leftMax = max(leftMax, height[left])
-                water += leftMax - height[left]
             else:
+                if h[right] > rightMax:
+                    rightMax = h[right]
+                else:
+                    res += rightMax - h[right]
                 right -= 1
-                rightMax = max(rightMax, height[right])
-                water += rightMax - height[right]
-        return water
+        return res
+            
         
