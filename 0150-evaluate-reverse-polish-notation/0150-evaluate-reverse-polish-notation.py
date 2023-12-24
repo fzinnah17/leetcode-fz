@@ -1,27 +1,31 @@
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        """
-        we can keep on adding the integers to the stack
-        as soon as we find a valid operator we take out the last two numbers, do that operation
-        add that operation to the result that we will return"""
-        
-        stack = []
         res = 0
-
+        stack = []
+        
         for i in tokens:
             if i.lstrip('-').isdigit():
                 stack.append(int(i))
-            elif i in ["+", "-", "*", "/"]:
-                lastNum = stack.pop()
-                prevNum = stack.pop()
+            else:
+                topVal = stack.pop()
+                bottomVal = stack.pop()
                 if i == "+":
-                    res = prevNum + lastNum
+                    res = bottomVal + topVal
                 elif i == "-":
-                    res = prevNum - lastNum
+                    res = bottomVal - topVal
                 elif i == "*":
-                    res = prevNum * lastNum
-                elif i == "/":
-                    res = int(prevNum / lastNum)
+                    res = bottomVal * topVal
+                else:
+                    res = int(bottomVal / topVal)
                 stack.append(res)
-        return int(stack[0])
-                        
+        return stack[0]
+"""
+1. Operand Tokens: When an operand token (a numeric value) is encountered, it is converted to an integer and pushed onto the stack.
+
+2. Operator Tokens: When an operator token ("+", "-", "*", or "/") is encountered, the code finds the top two values from the stack (bottomVal and topVal).
+
+3. Negative Numbers: Checks for a "-" sign at the beginning of a token and treats it as part of the numeric value.
+
+4. Stack Operations: Uses a stack to store intermediate results and operands, ensuring that the calculations are performed in the correct order."""   
+            
+        
