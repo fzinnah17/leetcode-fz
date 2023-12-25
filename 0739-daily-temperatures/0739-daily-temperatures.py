@@ -1,35 +1,29 @@
 class Solution:
-    def dailyTemperatures(self, temps: List[int]) -> List[int]:
-        # Create an array to store the result (initialized with zeros)
-        output = [0] * len(temps)
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        """
+        [0, 1, 1, 4, 2, 1, 1, 0, 0]
         
-        # Create a stack to store temperature indices
+        """
+        
         stack = []
         
-        stack.append((0, temps[0]))
+        output = [0]*len(temperatures) #key = index of the temparatures, value = temperature
         
-        # Iterate through the temperatures starting from the second day
-        for i in range(1, len(temps)):
-            # Get the current temperature
-            currTemp = temps[i]
+        stack.append((0, temperatures[0]))
+        
+        for i in range(1, len(temperatures)):
+            curr = temperatures[i]
             
-            # Check if the stack is not empty
             while stack:
-                # Get the previous temperature and its index from the top of the stack
-                prevTemp = stack[-1][1]
-                prevIndex = stack[-1][0]
+                idx = stack[-1][0]
+                prev = stack[-1][1]
                 
-                # Compare the current temperature with the previous temperature
-                if currTemp > prevTemp:
-                    # If the current temperature is higher, update the result
-                    output[prevIndex] = i - prevIndex
-                    stack.pop()  # Remove the previous index from the stack
+                if curr > prev:
+                    output[idx] = i - idx
+                    stack.pop()
+                    
                 else:
-                    # If the current temperature is not higher, break the loop
                     break
-            
-            # Add the current temperature's index to the stack
-            stack.append((i, temps[i]))
-        
-        # Return the resulting array
+                    
+            stack.append((i, temperatures[i]))
         return output
