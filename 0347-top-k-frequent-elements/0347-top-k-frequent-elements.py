@@ -18,6 +18,6 @@ class Solution:
         # print(res)
         return res
         """
-        Time: O(n) to create the map, O(n) to find the first k time repeated items = O(n)
+        Time: O(n) to create the map, sort the map is O(logn), O(n) to find the first k time repeated items = O(nlogn)
         Space: O(n) for creating a map
         """
