@@ -1,17 +1,23 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        numMap = {}
+        numsMap = {} #key = nums[i], value: count
         
         for i in range(len(nums)):
-            if nums[i] not in numMap:
-                numMap[nums[i]] = 1
+            if nums[i] not in numsMap:
+                numsMap[nums[i]] = 1
             else:
-                numMap[nums[i]] += 1
-        
-        # Sort the dictionary items by their values (frequencies) in descending order
-        sorted_items = sorted(numMap.items(), key=lambda x: x[1], reverse=True)
-        
-        # Extract the keys (elements) corresponding to the first k items
-        result = [item[0] for item in sorted_items[:k]]
-        
-        return result
+                numsMap[nums[i]] += 1
+        # print(numsMap) 
+        # print()
+        sortedMap = sorted(numsMap.items(), key = lambda x : x[1], reverse = True)
+        """
+        Now I want to return the 'k' keys of the tuple"""
+        # print(sortedMap[:k])
+        # print()
+        res = [n[0] for n in sortedMap[:k]]
+        # print(res)
+        return res
+        """
+        Time: O(n) to create the map, O(n) to find the first k time repeated items = O(n)
+        Space: O(n) for creating a map
+        """
