@@ -36,7 +36,12 @@ class TimeMap:
         
         while l <= r:
             m = l + ((r - l) // 2)
+            # value, midTime = self.kvMap[key][m]
+            # print(f"Key: {key}, Value: {value}, Timestamp: {midTime}")
             midTime = self.kvMap[key][m][1]
+            # print(f"self.kvMap[key]: {self.kvMap[key]}")
+            # print(f"midTime: {midTime}")
+            # print(f"l: {l}, r: {r}")
             
             if midTime == timestamp:
                 return self.kvMap[key][m][0]
