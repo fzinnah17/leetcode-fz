@@ -1,37 +1,53 @@
 class TimeMap:
 
     def __init__(self):
-        self.dict = {}
+        """
+        Hash table for keys to map to val and time (tuple)"""
+        self.kvMap = {}
         
-
     def set(self, key: str, value: str, timestamp: int) -> None:
-        if key not in self.dict:
-            self.dict[key] = []
-        self.dict[key].append([value,timestamp]) 
-    
+        """
+        Make the hashmap
+        if no value then add it to the map
+        otherwise append"""
+        if key not in self.kvMap:
+            self.kvMap[key] = [(value, timestamp)]
+        else:
+            self.kvMap[key].append((value,timestamp))
+        # print(self.kvMap)
     def get(self, key: str, timestamp: int) -> str:
-        #think the timestamp as the target here
-        res = ""
-        if key not in self.dict:
+        """
+        Use binary search pointing to the timestamp and do the usual operations
+        {
+        foo : [(bar, 1), (bar2, 4)]
+        }
+        l = 0, r = len(map) - 1 for timestamps
+        while l <= r: 
+        mid
+        if timestamp == pointerTime: return that pointerTime
+        if < then move l = m + 1
+        if > then move r = m - 1
+        """
+        # print(self.kvMap.values()) 
+        if key not in self.kvMap:
             return ""
-        value_list = self.dict[key]
-        # print(value_list)
-        # [['bar', 1]]
-        # [['bar', 1]]
-        # [['bar', 1], ['bar2', 4]]
-        # [['bar', 1], ['bar2', 4]]
-        left, right = 0, len(value_list) - 1
+        l, r = 0, len(self.kvMap[key]) - 1
+        res = ""
         
-        while left <= right:
-            middle = left + ((right - left) // 2)
+        while l <= r:
+            m = l + ((r - l) // 2)
+            midTime = self.kvMap[key][m][1]
             
-            if value_list[middle][1] <= timestamp:
-                res = value_list[middle][0] #update with the value
-                left = middle + 1
+            if midTime == timestamp:
+                return self.kvMap[key][m][0]
+            elif midTime < timestamp:
+                res = self.kvMap[key][m][0] #closest match
+                l = m + 1
             else:
-                right = middle - 1
+                r = m - 1
         return res
-        
+                
+
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()
