@@ -1,16 +1,18 @@
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        """
-        1. Iterate over the string to create a map
-        2. """
-        resMap = {}
-        for s in strs:
-            words = "".join(sorted(s))
-            if words not in resMap:
-                resMap[words] = [s]
-                # print(resMap)
+    def groupAnagrams(self, s: List[str]) -> List[List[str]]:
+        # s.sort()
+        sMap = {}
+        for i in s:
+            # print(i)
+            #each i
+            w = "".join(sorted(i))
+            #sort each i and make it w
+            # print(w)
+            if w not in sMap:
+                #if that w not in the map then add otherwise append
+                sMap[w] = [i]
             else:
-                resMap[words].append(s)
-        # print(resMap)
-        return list(resMap.values())
+                sMap[w].append(i)
+        return sMap.values()
+        # print(s)
         
