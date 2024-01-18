@@ -1,17 +1,17 @@
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
-        nums = sorted(nums)  # Sorting the array is not necessary for a binary search.
+    def search(self, nums: List[int], t: int) -> int:
+        """
+        sorted in ascending order
+        """
+        l, r = 0, len(nums) - 1
         
-        l = 0
-        r = len(nums) - 1
-        
-        while l <= r:  # Change the condition to include equality.
-            mid = l + ((r - l) // 2)
+        while l <= r:
+            m = l + ((r - l) // 2)
             
-            if target == nums[mid]:
-                return mid
-            elif target < nums[mid]:  # Adjust the comparisons here.
-                r = mid - 1
+            if nums[m] == t:
+                return m
+            elif nums[m] > t:
+                r = m - 1
             else:
-                l = mid + 1
+                l = m + 1
         return -1
