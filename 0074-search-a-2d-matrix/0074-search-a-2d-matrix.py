@@ -1,24 +1,28 @@
 class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+    def searchMatrix(self, matrix: List[List[int]], t: int) -> bool:
         """
-        variables: row, column
+        each row is in increasing order
         """
-        Row = len(matrix)
-        Col = len(matrix[0])
-        # print(matrix[0][0]) 1
-        # print(matrix[Row - 1][Col - 1]) 60
-        # print(Row * Col - 1) <- this is for length
-        top, bottom = 0, Row * Col - 1
-        # print(top, bottom)
-        # mid = (top + ((bottom - top) // 2))
-        while top <= bottom:
-            mid = (top + ((bottom - top) // 2))
-            mid_value = matrix[mid // Col][mid % Col]
-            if mid_value == target:
-                return True
-            elif mid_value > target:
-                bottom = mid - 1
-            else:
-                top = mid + 1
-        return False
+        Rows = len(matrix)
+        Cols = len(matrix[0])
+        
+        l = 0
+        r = (Rows * Cols) - 1
+        
+        while l <= r:
+            #find medium
+            m = l + ((r - l) // 2)
+            #find the corresponding row and column of the medium
+            midRow = m // Cols
+            midCol = m % Cols
             
+            if matrix[midRow][midCol] == t:
+                return True
+            elif matrix[midRow][midCol] > t:
+                r = m - 1
+            else:
+                l = m + 1
+        return False
+                
+                
+        
