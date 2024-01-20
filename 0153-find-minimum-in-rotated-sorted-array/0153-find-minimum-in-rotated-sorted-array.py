@@ -1,20 +1,22 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
         """
-        finding the middle
-        if the middle > nums[right] -> move pointer to right
-        else:
-        mid will be right
-        TC: O(logn) for dividing the search space in half with each iteration of the loop
-        SC: O(1)
+        nums = [4,5,6,7,0,1,2]
         """
         l, r = 0, len(nums) - 1
         
-        while l < r: #looking for the point where nums[mid] becomes less than nums[r] indicating the transition from the higher values to the lower values
-            mid = l + ((r-l) // 2)
-            if nums[mid] > nums[r]:
-                l = mid + 1
+        while l <= r:
+            m = l + ((r - l) // 2)
+            
+            #if middle > nums left nums = [4,5,6, 7 ,0,1,2] answer is in the right side of the array
+            if nums[m] > nums[r]:
+                l = m + 1
+            #if middle < nums left nums = [6, 7, 8,   1,   2, 3, 4, 5] so answer is on the right side
+            elif nums[m] < nums[r]:
+                r = m 
             else:
-                r = mid
-        return nums[r] #because mid is not defined when the loop is terminated so we use the value of right which is assigned as middle
+                return nums[m]
+                
+            
+        
         
