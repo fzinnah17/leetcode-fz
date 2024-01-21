@@ -18,7 +18,7 @@ class Solution:
         """
         maxProfit = 0
         
-        l, r = 0, 1
+        l, r = 0, 0
         
         while r < len(prices):
           curr = prices[r] - prices[l]
