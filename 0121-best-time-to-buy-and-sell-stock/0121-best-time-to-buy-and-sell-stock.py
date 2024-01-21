@@ -5,6 +5,16 @@ class Solution:
                          | r 
         curr = r - l
         maxprofit = max(curr, maxprofit)
+        
+        Pesudocode for sliding window approach:
+        1. we have variable to return and two pointers for the sliding window
+        2. as we are iterating over the given array,
+          a. we check thedifference between the stock prices of the days our pointers are at
+          b. if left > right:
+              i. shift our left pointer to the eight as we won't be earning any profit
+          c. we will move our right pointer regardless of left < right or left > right
+          d. update the maximum profit
+        3. return the maximum profit
         """
         maxProfit = 0
         
