@@ -1,58 +1,45 @@
 class TimeMap:
+    """
+    same key : [val1 : time stamp 1, val 2: timestamp 2, val 3: timestamp 3, .., .., ...]
+    """
 
     def __init__(self):
-        """
-        Hash table for keys to map to val and time (tuple)"""
         self.kvMap = {}
-        
-    def set(self, key: str, value: str, timestamp: int) -> None:
-        """
-        Make the hashmap
-        if no value then add it to the map
-        otherwise append"""
+
+    def set(self, key: str, v: str, t: int) -> None:
         if key not in self.kvMap:
-            self.kvMap[key] = [(value, timestamp)]
+            self.kvMap[key] = [(v, t)]
         else:
-            self.kvMap[key].append((value,timestamp))
+            self.kvMap[key].append((v, t))
         # print(self.kvMap)
-    def get(self, key: str, timestamp: int) -> str:
-        """
-        Use binary search pointing to the timestamp and do the usual operations
-        {
-        foo : [(bar, 1), (bar2, 4)]
-        }
-        l = 0, r = len(map) - 1 for timestamps
-        while l <= r: 
-        mid
-        if timestamp == pointerTime: return that pointerTime
-        if < then move l = m + 1
-        if > then move r = m - 1
-        """
-        # print(self.kvMap.values()) 
+        # {
+        # 'apple': [('red', 1), ('green', 4)], 
+        # 'banana': [('yellow', 2)], 
+        # 'orange': [('orange', 5)]
+        # }
+        
+    def get(self, key: str, t: int) -> str:
         if key not in self.kvMap:
             return ""
-        l, r = 0, len(self.kvMap[key]) - 1
-        res = ""
-        
+        values = self.kvMap[key]
+        # print(values)
+        l, r = 0, len(values) - 1
+        res = "" # timestamp_prev <= timestamp. If there are multiple such values, it returns the value associated with the largest timestamp_prev
         while l <= r:
             m = l + ((r - l) // 2)
-            # value, midTime = self.kvMap[key][m]
-            # print(f"Key: {key}, Value: {value}, Timestamp: {midTime}")
             midTime = self.kvMap[key][m][1]
-            # print(f"self.kvMap[key]: {self.kvMap[key]}")
-            # print(f"midTime: {midTime}")
-            # print(f"l: {l}, r: {r}")
             
-            if midTime == timestamp:
+            if midTime == t:
                 return self.kvMap[key][m][0]
-            elif midTime < timestamp:
-                res = self.kvMap[key][m][0] #closest match
+            elif midTime < t:
+                # timestamp_prev <= timestamp. If there are multiple such values, it returns the value associated with the largest timestamp_prev
+                res = self.kvMap[key][m][0]
                 l = m + 1
             else:
                 r = m - 1
+                                 
         return res
-                
-
+            
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()
