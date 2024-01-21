@@ -1,19 +1,20 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        # Initialize variables to keep track of minimum purchase price and maximum profit
-        min_purchase = float("inf")  # Set to positive infinity
-        max_profit = 0
+        """
+        Input: prices = [7,1,5,3,6,4]
+                         | r 
+        curr = r - l
+        maxprofit = max(curr, maxprofit)
+        """
+        maxProfit = 0
         
-        # Iterate through the prices list
-        for price in prices:
-            # Update the minimum purchase price if the current price is lower
-            min_purchase = min(min_purchase, price)
-            
-            # Calculate the potential profit by selling at the current price
-            potential_profit = price - min_purchase
-            
-            # Update the maximum profit if the potential profit is greater
-            max_profit = max(max_profit, potential_profit)
-            
-        # Return the maximum profit obtained
-        return max_profit
+        l, r = 0, 1
+        
+        while r < len(prices):
+          curr = prices[r] - prices[l]
+          if prices[l] > prices[r]:
+            l = r
+          r += 1
+          maxProfit = max(maxProfit, curr)
+        return maxProfit
+          
