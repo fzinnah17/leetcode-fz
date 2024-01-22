@@ -1,31 +1,23 @@
-class Solution(object):
-    def characterReplacement(self, s, k):
-        """
-        :type s: str
-        :type k: int
-        :rtype: int
-        Brute Force: We can check every single substring and therefore it will create O(n^2) time complexity
-        """
-        left = 0
-        right = 0
-        maxLen = 0
-        hashMap = {}
-        while right < len(s):
-            if s[right] in hashMap:
-                hashMap[s[right]] += 1
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        sMap = {}
+        longest = 0
+        max_count = 0
+        l, r = 0, 0
+        
+        while r < len(s):
+            if s[r] not in sMap:
+                sMap[s[r]] = 1
             else:
-                hashMap[s[right]] = 1
-            
-            windowSize = right - left + 1
-            if (windowSize - max(hashMap.values())) <= k:
-                maxLen = max(maxLen, windowSize)
-            else:
-                # if (windowSize - max(hashMap.values())) > k:
-                hashMap[s[left]] -= 1
-                if hashMap[s[left]] == 0:
-                    del hashMap[s[left]]
-                left += 1
-            right += 1
-            
-        return maxLen
-                
+                sMap[s[r]] += 1
+            max_count = max(max_count, sMap[s[r]])
+
+            if (r - l + 1 - max_count) > k:
+                sMap[s[l]] -= 1
+                l += 1
+
+            longest = max(longest, r - l + 1)
+
+            r += 1  # Increment the right pointer
+
+        return longest
