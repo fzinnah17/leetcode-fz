@@ -1,12 +1,8 @@
-class Solution(object):
-    def containsDuplicate(self, nums):
-        """
-        if numbers are repeated -> return True
-        if numbers are not repeated -> return False
-        TC: O(1) SC: O(n)
-        """
-        if len(set(nums)) != len(nums):
-            return True
-        return False
-        
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+      count = collections. defaultdict (int)
+      for n in nums:
+        count[n] += 1
+        if count [n] > 1: return True
+      return False
         
