@@ -1,46 +1,30 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
+      multRight = []
+      multLeft = []
+
+      # Create the multRight array
+      prevVal = nums[0]
+      multRight.append(prevVal)
+
+      for n in range(1, len(nums)):
+          prevVal *= nums[n]
+          multRight.append(prevVal)
+
+      # Create the multLeft array
+      prevVal = nums[-1]
+      multLeft.append(prevVal)
+
+      for n in range(len(nums) - 2, -1, -1):
+          prevVal *= nums[n]
+          multLeft.append(prevVal)
+
+      result = []
+      for i in range(len(nums)):
+          left = 1 if i == 0 else multRight[i - 1]
+          right = 1 if i == len(nums) - 1 else multLeft[len(nums) - i - 2]
+          result.append(left * right)
+
+      return result
+
         
-        """
-        Array and Hashing: Store all the data in a list and retrieve the data from the list
-        for this problem, it is giving us an array, we have to return an array that for each ith place we have the product of other nums
-        -> retrieve the products of others nums from the array
-        
-        Pseudocode:
-        in =  [ 1, 2,  3, 4]
-        out = [24, 12, 8, 6]
-        
-        regular prefix = [] -> [1] -> [1, 2] -> [1,2,3] -> [1,2,3, 4]
-        regular postfix = [1,2,3,4] -> [2,3,4] -> [3,4] -> [4] -> []
-        
-        multiplied prefix = [1] -> -> [1,1*2 = 2] -> [1,2, 1*1*2*3 = 6] -> [1,2,6, 1*1*2*3*4 = 24]  
-        -> [1,1,2,6,24]
-        multiplied postfix = [1*2*3*4 = 24] -> [2*3*4 = 24] -> [3*4 = 12] -> [4] -> []  
-        -> [24,24,12,4,1]
-        
-       [ 1,  1,  2,  6, 24]
-           x   x   x   x
-       [24, 24, 12, 4,   1]
-       
-       [24, 12, 8, 6]
-       
-       how to do this zigzag multiplication?
-       
-        """
-        n = len(nums)
-        preList = [1] * n
-        postList = [1] * n
-        
-        for i in range(1,n):
-            preList[i] = preList[i - 1] * nums[i - 1]
-        
-        for i in range(n - 2, -1, -1):
-            postList[i] = postList[i+1] * nums[i + 1]
-        
-        result = []
-        
-        for i in range(n):
-            result.append(preList[i] * postList[i])
-        
-        return result
-            
