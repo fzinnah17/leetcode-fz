@@ -1,29 +1,34 @@
-class Solution(object):
-    def checkInclusion(self, s1, s2):
-        """
-1. what it means for two strings to be permutation of each other?: Any permutation of any of these strings has to be present in the other string.
-2. TC: O(nlogn) or O(n)[if some space is used]
-3. Both strings must have same character frequencies, if one is permutation of another. Which data structure should be used to store frequencies?: Counter
-EDGE CASES:
-            a. if s1 is found in s2: True
-            b. length s2 < length s1: False
-            c. length same, both string count same: True
-        """
-        stringOne = Counter(s1)
-        stringTwo = Counter(s2)
-        
-        if s1 in s2:
-            return True
-        
-        if len(s2) < len(s1):
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if len(s1) > len(s2):
             return False
-        
-        if s1 == s2 and stringOne == stringTwo:
-            return True
-        
-        for i in range(len(s2) - len(s1) + 1): #this is needed so that later on we can only find the counter that only counts for the length of the window we are looking for
-            if stringOne == Counter(s2[i:i+len(s1)]): #the last number after the colon : gets ommitted
-                return True
+
+        s1Map = collections.defaultdict(int)
+        s2Map = collections.defaultdict(int)
+
+        # Populate s1Map with the frequency of characters in s1
+        for char in s1:
+            s1Map[char] += 1
+
+        l = 0
+        r = 0
+
+        # Iterate over s2 using a while loop
+        while r < len(s2):
+            # Add the current character to the s2Map
+            s2Map[s2[r]] += 1
+
+            # Check if the current window size is the same as s1
+            if r - l + 1 == len(s1):
+                if s1Map == s2Map:
+                    return True
+
+                # If the window is the right size, move left pointer to narrow the window
+                s2Map[s2[l]] -= 1
+                if s2Map[s2[l]] == 0:
+                    del s2Map[s2[l]]
+                l += 1
+
+            r += 1
+
         return False
-            
-        
