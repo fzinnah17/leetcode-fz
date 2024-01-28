@@ -1,37 +1,32 @@
 # Definition for singly-linked list.
-# class ListNode(object):
+# class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution(object):
-    def removeNthFromEnd(self, head, n):
-        """
-        :type head: ListNode
-        :type n: int
-        :rtype: ListNode
-        1. Create a dummy head to prevent edge cases
-                what's dummy next?
-        2. Create two pointers that is pointing to dummy
-        3. The fast pointer should move n nodes ahead so use for loop
-        4. Our loop breaks with fast having no value, so keep on looping till fast and fast's next value has value in it
-                as we are looping,
-                    a. slow moves one step
-                    b. so as well fast
-        5. delete the slow's next node by referencing slow's next pointer to be pointing to fast
-        6. return the list
-        """
-        
-        dummy = ListNode(None)
+
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        # Create a dummy node to handle edge cases like removing the first node
+        dummy = ListNode(0)
         dummy.next = head
-        slow, fast = dummy,dummy
-        
-        for i in range(n):
-            fast = fast.next
-            
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next
-        slow.next = slow.next.next
+
+        # First pass: find the length of the list
+        length = 0
+        temp = head
+        while temp:
+            length += 1
+            temp = temp.next
+
+        # Calculate the position from the start (length - n)
+        length -= n
+
+        # Second pass: reach the node just before the target
+        temp = dummy
+        while length > 0:
+            length -= 1
+            temp = temp.next
+
+        # Remove the nth node from end
+        temp.next = temp.next.next
+
         return dummy.next
-    #TC: O(n) SC: O(1)
-        
