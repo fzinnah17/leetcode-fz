@@ -4,41 +4,41 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        #TC: O(n) SC: O(1)
-        
-        prev, top, bottom = None, list1, list2
-        
-        if not top:
-            return bottom
-        if not bottom:
-            return top
-        
-        if top.val < bottom.val:
-            prev = top
-            top = top.next
-        else:
-            prev = bottom
-            bottom = bottom.next
-        
-        head = prev
-        
-        while top and bottom:
-            if top.val <= bottom.val:
-                temp = top.next
-                prev.next = top
-                prev = top
-                top = temp
-            else:
-                temp = bottom.next
-                prev.next = bottom
-                prev = bottom
-                bottom = temp
-        
-        if top:
-            prev.next = top
-        else:
-            prev.next = bottom
-        return head
+    def mergeTwoLists(self, lst1: Optional[ListNode], lst2: Optional[ListNode]) -> Optional[ListNode]:
+        '''
+            - create new list
+            - iterate using while list1 or list2
+                - compare values or set as 0 if DNE
+                - append whatever is smaller
+            - return list
             
+            list1 = [1,4,5,6], list2 = [1,3,4]
+            [1, 1, 3, 4, 4, ]
+            
+            if list1 >= list2: tmp.next = list1, tmp = tmp.next 
+            else: tmp.next = list2, tmp = tmp.next 
+            
+            if list1= tmp.append(list[:-1])
+            if list2= tmp.append(list[:-1])
+            
+        '''
         
+        head = ListNode(None)
+        tmp = head
+        
+        while lst1 and lst2:
+            if lst1.val <= lst2.val:
+                tmp.next = lst1
+                lst1 = lst1.next
+            else:
+                tmp.next = lst2
+                lst2 = lst2.next
+            tmp = tmp.next
+
+        
+        if lst1:
+            tmp.next = lst1
+        else:
+            tmp.next = lst2
+        
+        return head.next
