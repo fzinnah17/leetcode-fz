@@ -4,41 +4,39 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeTwoLists(self, lst1: Optional[ListNode], lst2: Optional[ListNode]) -> Optional[ListNode]:
-        '''
-            - create new list
-            - iterate using while list1 or list2
-                - compare values or set as 0 if DNE
-                - append whatever is smaller
-            - return list
-            
-            list1 = [1,4,5,6], list2 = [1,3,4]
-            [1, 1, 3, 4, 4, ]
-            
-            if list1 >= list2: tmp.next = list1, tmp = tmp.next 
-            else: tmp.next = list2, tmp = tmp.next 
-            
-            if list1= tmp.append(list[:-1])
-            if list2= tmp.append(list[:-1])
-            
-        '''
-        
-        head = ListNode(None)
-        tmp = head
-        
-        while lst1 and lst2:
-            if lst1.val <= lst2.val:
-                tmp.next = lst1
-                lst1 = lst1.next
-            else:
-                tmp.next = lst2
-                lst2 = lst2.next
-            tmp = tmp.next
-
-        
-        if lst1:
-            tmp.next = lst1
+    def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+      """
+      step 1:
+        - have the logic down
+        - have a null node/dummy node
+        - create a reference pointer to hold that dummy node
+        - while both lists exist, compare the value and add whichever is smaller
+      step 2:
+        - then think of edge cases
+        - so what if one list is bigger than the other/the elements are still left
+        - just add those to the end
+      """
+      
+      head = ListNode(None)
+      # print(head)
+      tmp = head #having a reference to the null node I created
+      # print(tmp)
+      
+      while l1 and l2:
+        if l1.val <= l2.val:
+          #have the null pointer to set to the next val
+          tmp.next = l1
+          #shift the pointers to the next one in each iteration
+          l1 = l1.next
         else:
-            tmp.next = lst2
+          tmp.next = l2
+          l2 = l2.next
+        #tmp pointer has to change as well for it to reach the end of the lists
+        tmp = tmp.next
         
-        return head.next
+      if l1:
+        tmp.next = l1
+      # if l2:
+      else:  
+        tmp.next = l2
+      return head.next
