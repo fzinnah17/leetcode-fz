@@ -1,36 +1,31 @@
-from collections import defaultdict
-
-class Solution(object):
-    def canFinish(self, numCourses, prerequisites):
-        def prereqMap(givenCourses):
-            reqMap = defaultdict(list)
-            for course in givenCourses:
-                key = course[0]  # course needs to be taken
-                val = course[1]  # course acting as a prereq
-                reqMap[key].append(val)
-            return reqMap  # Return the reqMap dictionary instead of printing it
-
-        courseMap = prereqMap(prerequisites)
-
-        def hasCycle(courseNum, visited, path):
-            if courseNum in path:
-                return True  # Cycle detected
+class Solution:
+    def canFinish(self, numCourses: int, prereq: List[List[int]]) -> bool:
+        
+        visited = set()
+        graph = collections.defaultdict(list)
+        for crs, pre in prereq:
+            graph[crs].append(pre)
             
-            if courseNum in visited:
+        def dfs(crs):
+            
+            if crs in visited:
                 return False
             
-            visited.add(courseNum)
-            path.add(courseNum)
+            if graph[crs] == []:
+                return True
+        
+            visited.add(crs)
             
-            for preReq in courseMap[courseNum]:
-                if hasCycle(preReq, visited, path):
-                    return True
+            for child in graph[crs]:
+                if not dfs(child):
+                    return False
             
-            path.remove(courseNum)
-            return False
-
-        for courseNum in range(numCourses):
-            if hasCycle(courseNum, set(), set()):
+            graph[crs] = []
+            visited.remove(crs)
+            return True
+        
+        for i in range(numCourses):
+            if not dfs(i):
                 return False
-
+        
         return True
