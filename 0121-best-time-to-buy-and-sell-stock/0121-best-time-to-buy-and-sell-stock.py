@@ -1,30 +1,24 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        """
-        Input: prices = [7,1,5,3,6,4]
-                         | r 
-        curr = r - l
-        maxprofit = max(curr, maxprofit)
-        
-        Pesudocode for sliding window approach:
-        1. we have variable to return and two pointers for the sliding window
-        2. as we are iterating over the given array,
-          a. we check thedifference between the stock prices of the days our pointers are at
-          b. if left > right:
-              i. shift our left pointer to the eight as we won't be earning any profit
-          c. we will move our right pointer regardless of left < right or left > right
-          d. update the maximum profit
-        3. return the maximum profit
-        """
-        maxProfit = 0
-        
-        l, r = 0, 0
-        
-        while r < len(prices):
-          curr = prices[r] - prices[l]
-          if prices[l] > prices[r]:
-            l = r
-          r += 1
-          maxProfit = max(maxProfit, curr)
-        return maxProfit
-          
+      """
+      7 1 5 3 6 4
+      l
+      r
+      
+      while loop r < len(arr) because it ensures that the right pointer (r) stays within the bounds of the array while expanding the window. This prevents index out of range errors and ensures that the window does not extend beyond the end of the array.
+      if r < l: l == r, 7 should come to 1
+      if r > l: r += 1, this movement should be done regardless, calculate the max
+      compare the previous calculated max and with max()
+      return whatever is the largest
+      """
+      
+      l, r = 0, 0
+      highest = 0
+      
+      while r < len(prices):
+        curr = prices[r] - prices[l]
+        if prices[r] < prices[l]:
+          l = r
+        r += 1
+        highest = max(highest, curr)
+      return highest
