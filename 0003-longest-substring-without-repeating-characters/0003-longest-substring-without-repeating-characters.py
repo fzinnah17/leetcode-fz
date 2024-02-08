@@ -1,19 +1,27 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
       """
-      left and right pointers check. if the characters are the same remove the first character from the window"""
-      res = 0
-      l, r = 0, 0
+      while loop
+      iterate and keep on adding the right pointer values
+      if right val > 1: we decrease the left count from the window
+      if left count == 0: we remove it from the window
+      as we are doing this algorithm, we are 
+      """
+      
+      l, r = 0,0
       visited = set()
+      length = 0
       
       while r < len(s):
-        if s[r] not in visited:
-          visited.add(s[r])
-          res = max(res, r - l + 1)
-          r += 1
-        else:
+        if s[r] in visited:
           visited.remove(s[l])
           l += 1
-      return res
+        else:
+          visited.add(s[r])
+          length = max(length, r - l + 1)   
+          r += 1
+        
+      return length
+          
         
         
