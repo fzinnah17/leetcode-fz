@@ -1,17 +1,31 @@
 class Solution:
-    def permute(self, nums):
-        res = []
+    def permute(self, nums: List[int]) -> List[List[int]]:
+      """
+      we have an array
+      pop one element
+      do the dfs on it
+      append it from the end
+      and do the dfs again
+      repeat the process until the last element of the array is reached
+      """
+      res = []
+      
+      #base case:
+      if len(nums) == 1:
+        return [[nums[0]]]
+      
+      def dfs(path, remNums):
+        # if no elements left from the nums array then just add it to the result
+        if not remNums:
+          res.append(path)
+          return
         
-        def dfs(path, options):
-            if not options:  # When no options left, we found a permutation
-                res.append(path)
-                return
-            
-            for _ in range(len(options)):
-                el = options.pop(0)  # Pop from start (modify to pop from end if desired)
-                dfs(path + [el], options)
-                options.append(el)  # Append back to restore the list for the next iteration
-        
-        dfs([], nums)  # Start DFS with an empty path and nums as the initial options list
-        
-        return res
+        # we iterate over each of the array on each step to remove and add it back
+        for _ in range(len(remNums)):
+          el = remNums.pop(0)
+          dfs(path + [el], remNums)
+          remNums.append(el)
+
+      dfs([], nums)
+      
+      return res
