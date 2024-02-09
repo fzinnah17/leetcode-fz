@@ -9,8 +9,8 @@ class Solution:
         
         #all the permuations are found and we reached the last element
         if not remNums:
-          print(f"Path as list: {path}")
-          print(f"Path as tuple before adding to res: {tuple(path)}")
+          # print(f"Path as list: {path}")
+          # print(f"Path as tuple before adding to res: {tuple(path)}")
           res.add(tuple(path))
           return
       
