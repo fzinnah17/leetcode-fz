@@ -1,26 +1,30 @@
 class Solution:
     def splitString(self, s: str) -> bool:
-        # Helper function for DFS search
         def dfs(index, prev):
-            # If we've reached the end of the string successfully, return True
+            print(f"dfs called with index={index}, prev={prev}")
             if index == len(s):
+                print("Reached end of string, returning True")
                 return True
             
-            # Try every possible split of the remaining string
             for end in range(index + 1, len(s) + 1):
                 num = int(s[index:end])
+                print(f"Trying substring s[{index}:{end}] = {s[index:end]}, num = {num}")
                 
-                # If no previous number is set or if the current number is exactly one less than the previous
                 if prev is None:
-                    # Skip the entire string being converted into one number
-                    if len(s) == end:
+                    if len(s) == end:  # Avoid considering the whole string as a start
+                        print("Skipping whole string as start")
                         continue
+                    print(f"First number in sequence: {num}, continuing search")
                     if dfs(end, num):
                         return True
                 elif num + 1 == prev:
+                    print(f"Found descending consecutive number: {num}, continuing search")
                     if dfs(end, num):
                         return True
+                else:
+                    print(f"{num} is not one less than {prev}, skipping")
                     
+            print(f"No valid sequence from index {index}, returning False")
             return False
         
         return dfs(0, None)
