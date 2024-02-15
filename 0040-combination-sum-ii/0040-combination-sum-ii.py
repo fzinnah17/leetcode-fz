@@ -22,7 +22,8 @@ class Solution:
           dfs(k + 1, curr+ cans[k])
 
           combs.pop()
-          # dfs(k + 1, curr)
+          # dfs(k + 1, curr) No need for an extra dfs call here since the loop will continue to the next index
+
         
       dfs(0, 0)
       
