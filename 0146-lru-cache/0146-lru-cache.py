@@ -16,20 +16,12 @@ class LRUCache:
         self.head.next = self.tail
         self.tail.prev = self.head
         
-    """
-    head <> [] <> [node] <> [] <> tail
-    """
     def removeNode(self, node):
         """give the variable names to the nodes"""
         prev, nxt = node.prev, node.next
         nxt.prev, prev.next = prev, nxt
         
     def addNode(self, node):
-        """
-        give the variable names to the nodes
-                         prev
-            head <> [] <> [] <> tail
-            head <> [] <> [] <> [node] <> tail"""
         prev = self.tail.prev
         self.tail.prev = node
         prev.next = node
