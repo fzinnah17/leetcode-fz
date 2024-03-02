@@ -1,44 +1,27 @@
 # Definition for singly-linked list.
-# class ListNode(object):
+# class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution(object):
-    def addTwoNumbers(self, l1, l2):
-        """
-        Start with an empty result list: to store the result of the addition.
-        Traverse the linked lists: Keeping track of the current node in each list
-        add the corresponding digits and the previous carry if there is any
-        Handling the carry
-        How do I consider the scenario where one linked list is longer than the other.
-        """
-        carry = 0
-        dummy = prev = ListNode(None)
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+      temp = ListNode(None) #this is where we start building the list
+      curr = temp
+      carry = 0 # need it to go to the next iteration of the loop
+      while l1 or l2 or carry:
+        num1 =l1.val if l1 else 0
+        num2 = l2.val if l2 else 0
         
-        while l1 or l2 or carry:
-            if l1:
-                val1 = l1.val
-            else:
-                val1 = 0
-            if l2:
-                val2 = l2.val
-            else:
-                val2 = 0
-            total = val1 + val2 + carry
-            modNum = total % 10
-            carry = total // 10
-            
-            prev.next = ListNode(modNum)
-            
-            prev = prev.next
-            
-            if l1:
-                l1 = l1.next
-            if l2:
-                l2 = l2.next
-        return dummy.next
-    #TC: O(m + n), m is the size of l1 and n is the size of l2
-    #SC: O(1) for no space used
-                
+        total = num1 + num2 + carry
+        digit = total % 10
+        carry = total // 10
         
+        curr.next = ListNode(digit)
+        curr = curr.next #current can move on
+        
+        #we can move to our next loop now
+        #for different lengths of the lists use if statement
+        if l1: l1 = l1.next
+        if l2: l2 = l2.next
+      return temp.next
         
