@@ -5,6 +5,10 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+      """
+      Time: O(m + n)
+      Space: O(m or n)
+      """
       temp = ListNode(None) #this is where we start building the list
       curr = temp
       carry = 0 # need it to go to the next iteration of the loop
