@@ -20,9 +20,9 @@ class Solution(object):
         6. Manipulate Pointers and Nodes: HOW DO I DO IT??????? 
         7. Keep Track of Relevant Information
         """
-        dummy = ListNode(0)
-        dummy.next = head
-        current = dummy
+        temp = ListNode()
+        temp.next = head
+        current = temp
         
         if not head:
             return None
@@ -37,7 +37,7 @@ class Solution(object):
             current.next = secondNode
             
             current = current.next.next #To make sure 'current' eventually points to the last node 'None'
-        return dummy.next
+        return temp.next
     #TC: O(n) SC: O(1)
             
             
