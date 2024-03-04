@@ -3,18 +3,22 @@ class Solution:
       if len(nums) == 1:
         return [[], [nums[0]]]
       nums.sort()
-      res = set()
+      res = []
       subsets = []
       
       def dfs(i):
         if i >= len(nums):
-          res.add(tuple(subsets[:]))
+          res.append(subsets[:])
           return
         
         subsets.append(nums[i])
         dfs(i + 1)
         
         subsets.pop()
+        # Skip all duplicates of the current element
+        while i + 1 < len(nums) and nums[i] == nums[i + 1]:
+            i += 1
+              
         dfs(i + 1)
         
       dfs(0)
