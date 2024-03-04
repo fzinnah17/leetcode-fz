@@ -4,8 +4,9 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def removeNthFromEnd(self, l: Optional[ListNode], n: int) -> Optional[ListNode]:
-      """
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        """
+      Fred's way
       1. can n be larger than the linked list?
       2. is it singly or doubly linked list?
       3. will the loop have any cycle?
@@ -20,24 +21,21 @@ class Solution:
         - one pass: two pointer strategy can help us look ahead
         - temp head: we can point to the head
       """
-      
-      temp = ListNode(0)
-      
-      slow = temp
-      slow.next = l
-      
-      fast = temp
-      
-      for i in range(n):
-        fast = fast.next
+        temp = ListNode()
+        slow = temp
+        slow.next = head
+        
+        #have another pointer at temp
+        fast = temp
+        
+        for i in range(n):
+            fast = fast.next
         
       #we don't know how many times so while loop
-      
-      while fast.next:
-        
-        fast = fast.next
-        slow = slow.next
-        
-      slow.next = slow.next.next
-      return temp.next
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+
+        slow.next = slow.next.next
+        return temp.next
         
