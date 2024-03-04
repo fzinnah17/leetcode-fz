@@ -17,5 +17,21 @@ class Solution:
             temp = head
             head = nxt
         return temp
+    
+"""
+Fred's way:
+
+def reverse_linked_list(l):
+  curr = l
+  prev = None
+
+  while curr:
+    temp = curr.next
+    curr.next = prev
+    prev = curr
+    curr = temp
+
+  return prev
+"""
             
         
