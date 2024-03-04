@@ -3,4 +3,4 @@ class Solution:
         """
         Do not return anything, modify s in-place instead.
         """
-        return s.reverse() #time: O(n) space: o(n)
+        return s.reverse() #time: O(n) space: o(1)
