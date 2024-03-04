@@ -5,15 +5,17 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-      
-      dummy = None
-      tmp = head
-      
-      while tmp:
-        nxt = tmp.next #holding 2 before losing reference
-        tmp.next = dummy
-        dummy = tmp
-        tmp = nxt
+        #an empty node we are making
+        temp = None
         
-      return dummy
+        while head:
+            #pointer pointing at 2
+            nxt = head.next
+            #1 will remove it's pointer from 2 and redirect it to null/empty node
+            head.next = temp
+            #shift the positions
+            temp = head
+            head = nxt
+        return temp
+            
         
