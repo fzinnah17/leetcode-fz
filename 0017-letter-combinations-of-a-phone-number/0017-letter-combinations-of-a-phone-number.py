@@ -1,12 +1,7 @@
 class Solution:
-    def letterCombinations(self, digits: str) -> List[str]:
-      """
-      just like permutations
-      """
-      # print(len(digits))
-      if not len(digits):
-        return []
-      numMap = {
+    def letterCombinations(self, s: str) -> List[str]:
+        #key = number and value = letters
+        numMap = {
         '2': 'abc',
         '3': 'def',
         '4': 'ghi',
@@ -15,30 +10,27 @@ class Solution:
         '7': 'pqrs',
         '8': 'tuv',
         '9': 'wxyz'
-      }
+    }
+        if not s:
+            return []
+        if len(s) == 1:
+            return list(numMap[s])
 
-      if len(digits) == 1:
-        return list(numMap[digits])
-        # return all the characters mapped to that number        
-        
-      res = []
-      permutations = []
-      
-      def dfs(i):
-        
-        if i >= len(digits):
-          res.append("".join(permutations))
-          return
-        
-        #append and then call the dfs function
-        #pop and then call the dfs function
-        for ch in numMap[digits[i]]:
-          permutations.append(ch)
-          dfs(i + 1)
-          permutations.pop()
-        
-        
-      dfs(0)
-      
-      return res
-      
+        res = []
+        combs = []
+
+        def dfs(i):
+            if i >= len(s):
+                res.append(''.join(combs)) 
+                return
+
+            # for j in range(i, len(s)):
+                #map the j with the hashmap
+                #take the hashmap values and make the combinations
+            for char in numMap[s[i]]:
+                combs.append(char)
+                dfs(i + 1)
+                combs.pop()
+
+        dfs(0)
+        return res
