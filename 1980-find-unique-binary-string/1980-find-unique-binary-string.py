@@ -1,6 +1,6 @@
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
-        def dfs(i, curr):
+        def dfs(i):
             if i == n:
                 binary_str = ''.join(curr)
                 if binary_str not in nums:
@@ -10,13 +10,13 @@ class Solution:
                 return
             
             curr.append('0')
-            result = dfs(i + 1, curr)
+            result = dfs(i + 1)
             if result:
                 return result
             curr.pop()
             
             curr.append('1')
-            result = dfs(i + 1, curr)
+            result = dfs(i + 1)
             if result:
                 return result
             curr.pop()
@@ -24,5 +24,5 @@ class Solution:
             return None
         
         n = len(nums[0])
-        initial = []
-        return dfs(0, initial)
+        curr = []
+        return dfs(0)
