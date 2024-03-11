@@ -1,14 +1,13 @@
-class Solution(object):
-    def countStudents(self, students, sandwiches):
-        """
-        TC: O(n) SC: O(1)
-        """
-        while sandwiches and sandwiches[0] in students:
-            if sandwiches[0] == students[0]:
+class Solution:
+    def countStudents(self, students: List[int], sandwiches: List[int]) -> int:
+        count = 0
+        while len(students) > count:
+            if students[0] == sandwiches[0]:
                 sandwiches.pop(0)
-                students.pop(0)
+                count = 0
             else:
-                currStudent = students.pop(0)
-                students.append(currStudent)
+                students.append(students[0])
+                count+=1
+
+            students.pop(0)
         return len(students)
-        
