@@ -1,24 +1,33 @@
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        res = 0
+    # 1) Create a Stack which will store the numbers.
         stack = []
-        
-        for i in tokens:
-            if i.lstrip('-').isdigit():
-                stack.append(int(i))
+
+        for token in tokens:
+            if token not in "+-/*":
+                stack.append(int(token))
+                continue
+
+            # 2) When you come across an operator, pop the top two elements from the stack.
+            number_2 = stack.pop()
+            number_1 = stack.pop()
+
+            # 3) Create a switch case which will act based on the type of the operator.
+            # 4) For each switch case, perform their operations on the two variables and push the result into the stack again.
+            result = 0
+            if token == "+":
+                result = number_1 + number_2
+            elif token == "-":
+                result = number_1 - number_2
+            elif token == "*":
+                result = number_1 * number_2
             else:
-                topVal = stack.pop()
-                bottomVal = stack.pop()
-                if i == "+":
-                    res = bottomVal + topVal
-                elif i == "-":
-                    res = bottomVal - topVal
-                elif i == "*":
-                    res = bottomVal * topVal
-                else:
-                    res = int(bottomVal / topVal)
-                stack.append(res)
-        return stack[0]
+                result = int(number_1 / number_2)
+
+            stack.append(result)
+
+        # 5) At the end of the traversal, the element at the top of the stack is the result.
+        return stack.pop()
 """
 1. Operand Tokens: When an operand token (a numeric value) is encountered, it is converted to an integer and pushed onto the stack.
 
