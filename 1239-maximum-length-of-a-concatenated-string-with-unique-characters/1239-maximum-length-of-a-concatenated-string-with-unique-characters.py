@@ -1,22 +1,22 @@
 class Solution:
     def maxLength(self, arr: List[str]) -> int:
-        max_len = 0
+        res = 0
         combination = []
 
-        def dfs(index):
-            nonlocal max_len
-            if index >= len(arr):
-                if len(set(''.join(combination))) == len(''.join(combination)):
-                    max_len = max(max_len, len(''.join(combination)))
+        def dfs(i):
+            nonlocal res
+            
+            if i >= len(arr):
+                concatenated = ''.join(combination)
+                if len(set(concatenated)) == len(concatenated):
+                    res = max(res, len(concatenated))
                 return
-
-            # Include the current string in the combination
-            combination.append(arr[index])
-            dfs(index + 1)
-
-            # Exclude the current string from the combination
+            
+            combination.append(arr[i])
+            dfs(i + 1)
+            
             combination.pop()
-            dfs(index + 1)
+            dfs(i + 1)
 
         dfs(0)
-        return max_len
+        return res
