@@ -1,5 +1,6 @@
 class Solution:
     def validateStackSequences(self, pushed, popped):
+        #T: O(n), S: O(n) we are generating an extra space
         j = 0
         stack = []
         for x in pushed:
