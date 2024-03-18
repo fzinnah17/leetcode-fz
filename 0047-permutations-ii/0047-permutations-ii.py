@@ -1,29 +1,22 @@
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-      if len(nums) == 1:
-        return [[nums[0]]]
-      
-      res = set() #a list is mutable and cannot be added to a set. we first convert the list to a tuple using the tuple() function, and then add it to the set.
-      
-      def dfs(path, remNums):
+        nums.sort()
+        res = set()
+        perms = []
         
-        #all the permuations are found and we reached the last element
-        if not remNums:
-          # print(f"Path as list: {path}")
-          # print(f"Path as tuple before adding to res: {tuple(path)}")
-          res.add(tuple(path))
-          return
-      
-        for _ in range(len(remNums)):
-          el = remNums.pop(0) #pop from the left
-          # print(f"popped element: {el}")
-          # print()
-          dfs(path + [el], remNums)
-          # print(f"path with popped element: {path + [el]}")
-          # print()
-          remNums.append(el)
-          # print(path)
-        # print(f"res: {res}")
-      dfs([], nums)
-      
-      return res
+        def dfs(i):
+            if i >= len(nums):
+                res.add(tuple(perms[:]))
+                return
+            
+            for j in range(i, len(nums)):
+                if j > i and nums[j] == nums[j - 1]:
+                    continue
+                nums[i], nums[j] = nums[j], nums[i]
+                perms.append(nums[i])
+                dfs(i + 1)
+                perms.pop()
+                # dfs(i + 1)
+                nums[i], nums[j] = nums[j], nums[i]
+        dfs(0)
+        return res
