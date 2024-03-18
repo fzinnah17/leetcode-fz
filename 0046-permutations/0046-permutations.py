@@ -1,18 +1,19 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        perms = []
         
-        res = []        
-        def dfs(path, remaining):
-            if not remaining:
-                res.append(path)
+        def dfs(i):
+            if i >= len(nums):
+                res.append(perms[:])
                 return
             
-            for _ in range(len(remaining)):
-                element = remaining.pop(0)
-                dfs(path + [element], remaining)
-                remaining.append(element)
-            
-        dfs([], nums)
+            for j in range(i, len(nums)):
+                nums[i], nums[j] = nums[j], nums[i]
+                perms.append(nums[i])
+                dfs(i+1)
+                perms.pop()
+                nums[i], nums[j] = nums[j], nums[i]
+        dfs(0)
         return res
-        
         
