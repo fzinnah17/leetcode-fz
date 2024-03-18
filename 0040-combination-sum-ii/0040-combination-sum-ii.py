@@ -1,26 +1,26 @@
 class Solution:
-    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+    def combinationSum2(self, nums: List[int], target: int) -> List[List[int]]:
+        nums.sort()
         res = set()
-        combs = []
-        candidates.sort()
+        cans = []
         
-        def dfs(i, curr):
+        def dfs(i, curr_sum):
             
-            if curr == target:
-                res.add(tuple(combs))
+            if curr_sum == target:
+                res.add(tuple(cans[:]))
                 return
             
-            if i >= len(candidates) or curr > target:
+            if i >= len(nums) or curr_sum > target:
                 return
             
-            for k in range(i, len(candidates)):
-                if k > i and candidates[k] == candidates[k - 1]:
+            for j in range(i, len(nums)):
+                if j > i and nums[j] == nums[j - 1]:
                     continue
-                combs.append(candidates[k])
-                dfs(k + 1, curr + candidates[k])
-            
-                combs.pop()            
-            
+                cans.append(nums[j])
+                dfs(j + 1, curr_sum + nums[j])
+                
+                cans.pop()
+                # dfs(j + 1, curr_sum)
+                
         dfs(0, 0)
-        
         return res
