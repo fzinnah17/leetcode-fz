@@ -12,6 +12,7 @@ class Solution:
                 i. If square student > 0, decement square student count
                 ii. Else break out of the logic
         3. Return total left (1's + 0's) --> Unfed student
+        Jonathan's way
         """
         circle_students = 0
         square_students = 0
