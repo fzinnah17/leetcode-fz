@@ -1,7 +1,13 @@
-class Solution(object):
-    def isPowerOfTwo(self, n):
-        if n == 0:
-            return False
-        while n % 2 == 0:
-            n /= 2
-        return n == 1
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        if(n==1):
+            return True
+        for i in range(0,n):
+            power=pow(2,i)
+            if(power<n):
+                continue
+            if(power==n):
+                return True
+            if(power>n):
+                return False
+        return False 
