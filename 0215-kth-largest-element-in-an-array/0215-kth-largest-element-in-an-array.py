@@ -1,6 +1,7 @@
 class Solution:
     #n >>>>>>>>>>> k, we are just only taking a look at the 5th largest number
     #T: O(nlogk), S: O(k) -> because heap is only size k
+    #Fred's way
     
     def findKthLargest(self, nums: List[int], k: int) -> int:
         #start with nothing, here time is O(1)
