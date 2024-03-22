@@ -1,10 +1,11 @@
 class Solution:
-    def shortestToChar(self, S, C):
-        myList = [i for i,letter in enumerate(S) if letter == C]
-        result = []
-        for i in range(len(S)):
-            min_pos = []
-            for j in myList:
-                min_pos.append(abs(j-i))
-            result.append(min(min_pos))
-        return result
+  def shortestToChar(self, s, c):
+    ans = []
+    for i in range(len(s)):
+      min_distance = float('inf')  # Set initial distance to positive infinity
+      for j in range(len(s)):
+        if s[j] == c:
+          closest = abs(i - j)
+          min_distance = min(min_distance, closest)
+      ans.append(min_distance)  # Append the minimum distance for current index
+    return ans
