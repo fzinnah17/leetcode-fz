@@ -1,11 +1,23 @@
 class Solution:
     def shortestToChar(self, s, c):
-        ans = []
+        """
+        Time: O(n^2)
+        Space: O(n) + O(n) [stack space]"""
+        res = [len(s)] * len(s)
+        
+        def helper(pos, dist):
+            if res[pos] <= dist:
+                return
+            res[pos] = dist
+            
+            if pos < len(s) - 1:
+                helper(pos + 1, dist + 1)
+            
+            if pos > 0:
+                helper(pos - 1, dist + 1)
+        
         for i in range(len(s)):
-            min_distance = float('inf')  # comparing it to previous testcase
-            for j in range(len(s)):
-                if s[j] == c:
-                    closest = abs(i - j)
-                    min_distance = min(min_distance, closest)
-            ans.append(min_distance)  # Append the minimum distance for current index
-        return ans
+            if s[i] == c:
+                helper(i, 0)
+        return res
+    
