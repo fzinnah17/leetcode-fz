@@ -2,7 +2,7 @@ class Solution:
     def shortestToChar(self, s, c):
         ans = []
         for i in range(len(s)):
-            min_distance = float('inf')  # Set initial distance to positive infinity
+            min_distance = float('inf')  # comparing it to previous testcase
             for j in range(len(s)):
                 if s[j] == c:
                     closest = abs(i - j)
